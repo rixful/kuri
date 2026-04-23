@@ -46,11 +46,11 @@
     🔊 音声ON
   </button>
 
-  <!-- ポップアップ -->
+  <!-- シンプル版（フル配信はこちらに戻した） -->
   <div id="overlay" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); align-items:center; justify-content:center; z-index:50;">
     <div class="bg-white/10 backdrop-blur-md rounded-3xl px-8 py-10 text-center max-w-[320px] w-full mx-4 border border-white/30">
-      <p id="deliveryTime" class="text-white text-2xl font-bold mb-3"></p>
-      <p id="randomText" class="text-white/70 text-sm mb-8"></p>
+      <p class="text-white text-xl font-bold mb-1">フル配信はこちら</p>
+      <p id="randomText" class="text-white/70 text-sm mb-8">(そらで検索 🔎)</p>
       <div id="countdown" class="text-white text-lg font-medium mb-8">6秒後に移動</div>
       <button onclick="goToAffiliate()" class="w-full bg-gradient-to-r from-green-400 to-emerald-500 text-white font-bold text-xl py-5 rounded-3xl shadow-lg">今すぐ見る</button>
     </div>
@@ -61,21 +61,9 @@
     const soundBtn = document.getElementById('soundBtn');
     const overlay = document.getElementById('overlay');
     const countdownEl = document.getElementById('countdown');
-    const deliveryTimeEl = document.getElementById('deliveryTime');
     const randomText = document.getElementById('randomText');
 
     const AFFILIATE_URL = "https://twimg.you/s/zep8w1yz";
-
-    // 開いた時刻から15分後を表示
-    function setDeliveryTime() {
-      const now = new Date();
-      now.setMinutes(now.getMinutes() + 15);
-
-      const hour = now.getHours().toString().padStart(2, '0');
-      const minute = now.getMinutes().toString().padStart(2, '0');
-
-      deliveryTimeEl.textContent = `${hour}:${minute}より配信開始`;
-    }
 
     // ランダム名前
     const names = ["miu", "りん", "あや", "しおり", "はづき", "まな", "えま", "かな", "ゆうり"];
@@ -95,7 +83,6 @@
     video.addEventListener('play', function handler() {
       if (overlay.style.display !== 'flex') {
         setTimeout(() => {
-          setDeliveryTime();
           setRandomName();
           overlay.style.display = 'flex';
           startCountdown();
