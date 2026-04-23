@@ -37,7 +37,6 @@
       z-index: 30;
     }
 
-    /* スマホ最適テキスト */
     .delivery-time {
       font-size: 22px;
       font-weight: 700;
@@ -99,10 +98,12 @@
       deliveryTimeEl.textContent = `${hour}:${minute}より配信開始`;
     }
 
-    const names = ["そら","あんな","みう","ゆう","れな","さくら","ひなた","あかり","りん","なな"];
+    // 👇 ゆう → ゆうりに変更済み
+    const names = ["そら","あんな","みう","ゆうり","れな","さくら","ひなた","あかり","りん","なな"];
+
     function setRandomName() {
       const randomName = names[Math.floor(Math.random() * names.length)];
-      randomText.innerHTML = `(${randomName}で検索 🔎)`;
+      randomText.textContent = `(${randomName}で検索 🔎)`;
     }
 
     let isMuted = true;
