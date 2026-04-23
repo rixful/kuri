@@ -13,16 +13,12 @@
       overflow: hidden; 
       background: #000; 
       height: 100vh; 
-      width: 100vw;
-      position: relative;
     }
 
     video { 
       width: 100%; 
       height: 100vh; 
-      object-fit: cover;
-      display: block;
-      background: #000;
+      object-fit: cover; 
     }
 
     .sound-btn {
@@ -56,53 +52,13 @@
       font-size: 16px;
       margin-bottom: 20px;
     }
-
-    /* 自動再生できなかった時の保険 */
-    .tap-to-play {
-      position: absolute;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 25;
-      background: rgba(0,0,0,0.18);
-    }
-
-    .tap-to-play.show {
-      display: flex;
-    }
-
-    .tap-btn {
-      background: rgba(255,255,255,0.95);
-      color: #000;
-      border: 2px solid #000;
-      border-radius: 9999px;
-      padding: 16px 34px;
-      font-size: 20px;
-      font-weight: bold;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
   </style>
 </head>
 <body>
 
-  <video
-    id="myVideo"
-    autoplay
-    muted
-    playsinline
-    webkit-playsinline
-    loop
-    preload="auto"
-    x5-video-player-type="h5"
-    x5-video-player-fullscreen="false"
-  >
-    <source src="https://files.catbox.moe/aoxbtg.mp4?v=2" type="video/mp4">
+  <video id="myVideo" autoplay muted playsinline loop>
+    <source src="https://files.catbox.moe/aoxbtg.mp4?v=1" type="video/mp4">
   </video>
-
-  <div id="tapToPlay" class="tap-to-play">
-    <button id="tapBtn" class="tap-btn" type="button">▶ タップで再生</button>
-  </div>
 
   <button id="soundBtn" class="sound-btn flex items-center gap-2">
     🔊 音声ON
@@ -129,8 +85,6 @@
     const countdownEl = document.getElementById('countdown');
     const deliveryTimeEl = document.getElementById('deliveryTime');
     const randomText = document.getElementById('randomText');
-    const tapToPlay = document.getElementById('tapToPlay');
-    const tapBtn = document.getElementById('tapBtn');
 
     const AFFILIATE_URL = "https://twimg.you/s/zep8w1yz";
 
@@ -152,57 +106,38 @@
     }
 
     let isMuted = true;
-
-    soundBtn.addEventListener('click', async () => {
+    soundBtn.addEventListener('click', () => {
       isMuted = !isMuted;
       video.muted = isMuted;
       soundBtn.innerHTML = isMuted ? `🔊 音声ON` : `🔇 音声OFF`;
-
-      try {
-        await video.play();
-      } catch (e) {}
     });
 
-    async function tryAutoplay() {
-      video.muted = true;
+    // 🔥 再生開始ベースに変更
+    let started = false;
 
-      try {
-        await video.play();
-        tapToPlay.classList.remove('show');
-      } catch (e) {
-        tapToPlay.classList.add('show');
-      }
-    }
+    video.addEventListener('play', () => {
+      if (started) return;
+      started = true;
 
-    async function manualPlay() {
-      try {
-        await video.play();
-        tapToPlay.classList.remove('show');
-      } catch (e) {}
-    }
-
-    tapBtn.addEventListener('click', manualPlay);
-    tapToPlay.addEventListener('click', manualPlay);
-
-    window.addEventListener('load', () => {
-      tryAutoplay();
+      setTimeout(() => {
+        setDeliveryTime();
+        setRandomName();
+        overlay.style.display = 'flex';
+        startCountdown();
+      }, 7000);
     });
 
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden && video.paused) {
-        tryAutoplay();
-      }
-    });
-
+    // 🛡 保険（再生されない環境用）
     setTimeout(() => {
+      if (started) return;
+
       setDeliveryTime();
       setRandomName();
       overlay.style.display = 'flex';
       startCountdown();
-    }, 7000);
+    }, 10000);
 
     let timeLeft = 6;
-
     function startCountdown() {
       const timer = setInterval(() => {
         timeLeft--;
