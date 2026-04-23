@@ -4,23 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>フル配信はこちら</title>
-  <meta name="theme-color" content="#000000">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { 
-      margin: 0; 
-      padding: 0; 
-      overflow: hidden; 
-      background: #000; 
-      height: 100vh; 
-    }
-
-    video { 
-      width: 100%; 
-      height: 100vh; 
-      object-fit: cover; 
-    }
-
+    body { margin: 0; padding: 0; overflow: hidden; background: #000; height: 100vh; }
+    video { width: 100%; height: 100vh; object-fit: cover; }
     .sound-btn {
       position: absolute;
       bottom: 22%;
@@ -31,50 +18,30 @@
       border: 2px solid #000;
       border-radius: 9999px;
       padding: 14px 36px;
-      font-size: 18px;
+      font-size: 19px;
       font-weight: bold;
       box-shadow: 0 4px 20px rgba(0,0,0,0.4);
       z-index: 30;
-    }
-
-    .delivery-time {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .random-text {
-      font-size: 13px;
-      margin-bottom: 18px;
-    }
-
-    .countdown {
-      font-size: 16px;
-      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
 
   <video id="myVideo" autoplay muted playsinline loop>
-    <source src="https://files.catbox.moe/aoxbtg.mp4?v=1" type="video/mp4">
+    <source src="https://files.catbox.moe/aoxbtg.mp4" type="video/mp4">
   </video>
 
   <button id="soundBtn" class="sound-btn flex items-center gap-2">
     🔊 音声ON
   </button>
 
-  <div id="overlay" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.88); align-items:center; justify-content:center; z-index:50;">
-    <div class="bg-white/10 backdrop-blur-md rounded-3xl px-8 py-8 text-center max-w-[320px] w-full mx-4 border border-white/30">
-      
-      <p id="deliveryTime" class="text-white delivery-time"></p>
-      <p id="randomText" class="text-white/70 random-text"></p>
-      <div id="countdown" class="text-white countdown">6秒後に移動</div>
-
-      <button onclick="goToAffiliate()" class="w-full bg-gradient-to-r from-green-400 to-emerald-500 text-white font-bold text-xl py-5 rounded-3xl shadow-lg">
-        今すぐ見る
-      </button>
-
+  <!-- ポップアップ -->
+  <div id="overlay" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); align-items:center; justify-content:center; z-index:50;">
+    <div class="bg-white/10 backdrop-blur-md rounded-3xl px-8 py-10 text-center max-w-[320px] w-full mx-4 border border-white/30">
+      <p id="deliveryTime" class="text-white text-2xl font-bold mb-3"></p>
+      <p id="randomText" class="text-white/70 text-sm mb-8"></p>
+      <div id="countdown" class="text-white text-lg font-medium mb-8">6秒後に移動</div>
+      <button onclick="goToAffiliate()" class="w-full bg-gradient-to-r from-green-400 to-emerald-500 text-white font-bold text-xl py-5 rounded-3xl shadow-lg">今すぐ見る</button>
     </div>
   </div>
 
@@ -88,6 +55,7 @@
 
     const AFFILIATE_URL = "https://twimg.you/s/zep8w1yz";
 
+    // 開いた時刻から15分後を表示
     function setDeliveryTime() {
       const now = new Date();
       now.setMinutes(now.getMinutes() + 15);
@@ -98,11 +66,12 @@
       deliveryTimeEl.textContent = `${hour}:${minute}より配信開始`;
     }
 
-    const names = ["miu","りん","あや","しおり","はづき","まな","えま","かな","ゆうり"];
+    // 指定された名前リスト（ランダム表示）
+    const names = ["miu", "りん", "あや", "しおり", "はづき", "まな", "えま", "かな", "ゆうり"];
 
     function setRandomName() {
       const randomName = names[Math.floor(Math.random() * names.length)];
-      randomText.textContent = `(${randomName}で検索 🔎)`;
+      randomText.innerHTML = `(${randomName}で検索 🔎)`;
     }
 
     let isMuted = true;
@@ -112,30 +81,13 @@
       soundBtn.innerHTML = isMuted ? `🔊 音声ON` : `🔇 音声OFF`;
     });
 
-    // 🔥 再生開始ベースに変更
-    let started = false;
-
-    video.addEventListener('play', () => {
-      if (started) return;
-      started = true;
-
-      setTimeout(() => {
-        setDeliveryTime();
-        setRandomName();
-        overlay.style.display = 'flex';
-        startCountdown();
-      }, 7000);
-    });
-
-    // 🛡 保険（再生されない環境用）
+    // 7秒後にポップアップを表示
     setTimeout(() => {
-      if (started) return;
-
       setDeliveryTime();
       setRandomName();
       overlay.style.display = 'flex';
       startCountdown();
-    }, 10000);
+    }, 7000);
 
     let timeLeft = 6;
     function startCountdown() {
