@@ -66,9 +66,8 @@
       deliveryTimeEl.textContent = `${hour}:${minute}より配信開始`;
     }
 
-    // 指定された名前リスト（ランダム表示）
+    // ランダム名前
     const names = ["miu", "りん", "あや", "しおり", "はづき", "まな", "えま", "かな", "ゆうり"];
-
     function setRandomName() {
       const randomName = names[Math.floor(Math.random() * names.length)];
       randomText.innerHTML = `(${randomName}で検索 🔎)`;
@@ -81,13 +80,18 @@
       soundBtn.innerHTML = isMuted ? `🔊 音声ON` : `🔇 音声OFF`;
     });
 
-    // 7秒後にポップアップを表示
-    setTimeout(() => {
-      setDeliveryTime();
-      setRandomName();
-      overlay.style.display = 'flex';
-      startCountdown();
-    }, 7000);
+    // 動画が再生開始されてから7秒後にポップアップを表示
+    video.addEventListener('play', () => {
+      // すでにポップアップが出ていない場合のみ
+      if (overlay.style.display !== 'flex') {
+        setTimeout(() => {
+          setDeliveryTime();
+          setRandomName();
+          overlay.style.display = 'flex';
+          startCountdown();
+        }, 7000);   // 動画再生開始から7秒後
+      }
+    }, { once: true });   // 1回だけ実行
 
     let timeLeft = 6;
     function startCountdown() {
