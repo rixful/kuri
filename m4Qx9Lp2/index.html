@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>フル配信はこちら</title>
+  <meta name="theme-color" content="#000000">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { 
@@ -38,20 +39,21 @@
 <body>
 
   <video id="myVideo" autoplay muted playsinline loop>
-    <source src="https://files.catbox.moe/zmjnqu.mp4" type="video/mp4">
+    <source src="https://files.catbox.moe/e2nicf.mp4?v=1" type="video/mp4">
   </video>
 
   <button id="soundBtn" class="sound-btn flex items-center gap-2">
     🔊 音声ON
   </button>
 
-  <!-- シンプルなポップアップ（フル配信はこちらに戻した） -->
   <div id="overlay" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); align-items:center; justify-content:center; z-index:50;">
     <div class="bg-white/10 backdrop-blur-md rounded-3xl px-8 py-10 text-center max-w-[320px] w-full mx-4 border border-white/30">
       <p class="text-white text-xl font-bold mb-1">フル配信はこちら</p>
       <p id="randomText" class="text-white/70 text-sm mb-8">(そらで検索 🔎)</p>
       <div id="countdown" class="text-white text-lg font-medium mb-8">6秒後に移動</div>
-      <button onclick="goToAffiliate()" class="w-full bg-gradient-to-r from-green-400 to-emerald-500 text-white font-bold text-xl py-5 rounded-3xl shadow-lg">今すぐ見る</button>
+      <button onclick="goToAffiliate()" class="w-full bg-gradient-to-r from-green-400 to-emerald-500 text-white font-bold text-xl py-5 rounded-3xl shadow-lg">
+        今すぐ見る
+      </button>
     </div>
   </div>
 
@@ -64,11 +66,11 @@
 
     const AFFILIATE_URL = "https://twimg.you/s/zep8w1yz";
 
-    // ランダム名前
     const names = ["miu", "りん", "あや", "しおり", "はづき", "まな", "えま", "かな", "ゆうり"];
+
     function setRandomName() {
       const randomName = names[Math.floor(Math.random() * names.length)];
-      randomText.innerHTML = `(${randomName}で検索 🔎)`;
+      randomText.textContent = `(${randomName}で検索 🔎)`;
     }
 
     let isMuted = true;
@@ -78,16 +80,12 @@
       soundBtn.innerHTML = isMuted ? `🔊 音声ON` : `🔇 音声OFF`;
     });
 
-    // 動画が再生開始されてから7秒後にポップアップを表示
     video.addEventListener('play', function handler() {
-      if (overlay.style.display !== 'flex') {
-        setTimeout(() => {
-          setRandomName();
-          overlay.style.display = 'flex';
-          startCountdown();
-        }, 7000);
-      }
-      video.removeEventListener('play', handler);
+      setTimeout(() => {
+        setRandomName();
+        overlay.style.display = 'flex';
+        startCountdown();
+      }, 7000);
     }, { once: true });
 
     let timeLeft = 6;
