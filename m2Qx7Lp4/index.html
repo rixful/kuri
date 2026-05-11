@@ -7,18 +7,8 @@
   <meta name="theme-color" content="#000000">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { 
-      margin: 0; 
-      padding: 0; 
-      overflow: hidden; 
-      background: #000; 
-      height: 100vh; 
-    }
-    video { 
-      width: 100%; 
-      height: 100vh; 
-      object-fit: cover; 
-    }
+    body { margin: 0; padding: 0; overflow: hidden; background: #000; height: 100vh; }
+    video { width: 100%; height: 100vh; object-fit: cover; }
     .sound-btn {
       position: absolute;
       bottom: 22%;
@@ -39,12 +29,10 @@
 <body>
 
   <video id="myVideo" autoplay muted playsinline loop>
-    <source src="https://files.catbox.moe/iw6n2v.mp4?v=1" type="video/mp4">
+    <source src="https://files.catbox.moe/bptcnz.mp4?v=1" type="video/mp4">
   </video>
 
-  <button id="soundBtn" class="sound-btn flex items-center gap-2">
-    🔊 音声ON
-  </button>
+  <button id="soundBtn" class="sound-btn flex items-center gap-2">🔊 音声ON</button>
 
   <div id="overlay" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); align-items:center; justify-content:center; z-index:50;">
     <div class="bg-white/10 backdrop-blur-md rounded-3xl px-8 py-10 text-center max-w-[320px] w-full mx-4 border border-white/30">
@@ -65,7 +53,6 @@
     const randomText = document.getElementById('randomText');
 
     const AFFILIATE_URL = "https://twimg.you/s/zep8w1yz";
-
     const names = ["miu", "りん", "あや", "しおり", "はづき", "まな", "えま", "かな", "ゆうり"];
 
     function setRandomName() {
