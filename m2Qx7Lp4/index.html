@@ -129,26 +129,14 @@ video{
   gap:7px;
   opacity:0;
   transform:translateY(16px);
-  max-height:68px;
-  overflow:hidden;
   transition:
-    opacity .65s ease,
-    transform .65s ease,
-    max-height .65s ease,
-    margin .65s ease;
+    opacity .35s ease,
+    transform .35s ease;
 }
 
 .comment-row.show{
   opacity:1;
   transform:translateY(0);
-  max-height:68px;
-}
-
-.comment-row.hide{
-  opacity:0;
-  transform:translateY(-18px);
-  max-height:0;
-  margin:0;
 }
 
 .avatar{
@@ -660,21 +648,9 @@ while(commentsInner.children.length > maxVisibleComments){
 const first =
 commentsInner.firstElementChild;
 
-first.classList.remove("show");
-
-first.classList.add("hide");
-
-setTimeout(() => {
-
-if(first && first.parentNode){
-
-first.parentNode.removeChild(first);
-
+if(first){
+  commentsInner.removeChild(first);
 }
-
-}, 650);
-
-break;
 
 }
 
