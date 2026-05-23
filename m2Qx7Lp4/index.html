@@ -6,12 +6,7 @@
 <title>LIVE配信中</title>
 
 <style>
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 html,body{
   width:100%;
@@ -45,7 +40,6 @@ video{
 }
 
 /* 上部UI */
-
 .top-left{
   position:absolute;
   top:38px;
@@ -99,32 +93,32 @@ video{
 }
 
 /* コメント */
-
 .comments{
   position:absolute;
-  left:12px;
-  top:88px;
-  bottom:auto;
+  left:-8px;
+  top:98px;
   z-index:3;
-  width:55%;
-  max-width:220px;
-  height:520px;
+  width:56%;
+  max-width:235px;
+  height:360px;
   overflow:hidden;
   pointer-events:none;
 
   -webkit-mask-image:linear-gradient(
     to bottom,
     transparent 0%,
-    black 12%,
-    black 82%,
+    rgba(0,0,0,.25) 10%,
+    rgba(0,0,0,.95) 24%,
+    rgba(0,0,0,1) 72%,
     transparent 100%
   );
 
   mask-image:linear-gradient(
     to bottom,
     transparent 0%,
-    black 12%,
-    black 82%,
+    rgba(0,0,0,.25) 10%,
+    rgba(0,0,0,.95) 24%,
+    rgba(0,0,0,1) 72%,
     transparent 100%
   );
 }
@@ -132,51 +126,51 @@ video{
 .comments-inner{
   position:absolute;
   left:0;
-  bottom:0;
+  top:0;
   width:100%;
   display:flex;
   flex-direction:column;
-  gap:9px;
+  gap:5px;
 }
 
 .comment-row{
   display:flex;
   align-items:flex-start;
-  gap:7px;
+  gap:6px;
   opacity:0;
-  transform:translateY(16px);
-  max-height:68px;
+  transform:translateY(10px);
+  max-height:60px;
   overflow:hidden;
   transition:
-    opacity .45s ease,
-    transform .45s ease,
-    max-height .45s ease,
-    margin .45s ease;
+    opacity .5s ease,
+    transform .5s ease,
+    max-height .5s ease,
+    margin .5s ease;
 }
 
 .comment-row.show{
   opacity:1;
   transform:translateY(0);
-  max-height:68px;
+  max-height:60px;
 }
 
 .comment-row.hide{
   opacity:0;
-  transform:translateY(-16px);
+  transform:translateY(-14px);
   max-height:0;
   margin:0;
 }
 
 .avatar{
-  width:28px;
-  height:28px;
+  width:26px;
+  height:26px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   color:#fff;
   font-weight:800;
-  font-size:15px;
+  font-size:14px;
   flex-shrink:0;
 }
 
@@ -184,37 +178,35 @@ video{
   display:flex;
   flex-direction:column;
   align-items:flex-start;
-  gap:3px;
-  margin-top:-2px;
+  gap:1px;
+  margin-top:-1px;
 }
 
 .user{
-  color:#cfcfcf;
-  font-size:11px;
+  color:#d8d8d8;
+  font-size:10px;
   font-weight:700;
   margin-left:2px;
-  text-shadow:0 0 5px #000;
+  text-shadow:0 0 4px #000;
 }
 
 .bubble{
-  background:rgba(0,0,0,.46);
+  background:rgba(0,0,0,.42);
   color:#fff;
-  border-radius:0 14px 14px 14px;
-  padding:6px 10px;
-  font-size:12px;
-  line-height:1.28;
-  max-width:170px;
-  margin-top:1px;
+  border-radius:0 13px 13px 13px;
+  padding:5px 10px;
+  font-size:11px;
+  line-height:1.22;
+  max-width:160px;
 }
 
 .bubble.pink{
-  background:rgba(150,18,48,.50);
-  border:1px solid rgba(255,55,95,.30);
+  background:rgba(150,18,48,.56);
+  border:1px solid rgba(255,55,95,.24);
   font-weight:800;
 }
 
 /* 年齢確認 */
-
 .age-panel{
   position:absolute;
   top:47%;
@@ -267,11 +259,7 @@ video{
 
 .enter{
   height:41px;
-  background:linear-gradient(
-    135deg,
-    #ff2b63,
-    #ff0048
-  );
+  background:linear-gradient(135deg,#ff2b63,#ff0048);
   color:#fff;
   font-size:13px;
   font-weight:900;
@@ -298,7 +286,6 @@ video{
 }
 
 /* カウントダウン */
-
 .count-panel{
   position:absolute;
   left:50%;
@@ -353,7 +340,6 @@ video{
 }
 
 /* 音量 */
-
 .sound-btn{
   position:absolute;
   right:18px;
@@ -371,7 +357,6 @@ video{
   justify-content:center;
   cursor:pointer;
 }
-
 </style>
 </head>
 
@@ -379,26 +364,16 @@ video{
 
 <div class="wrap">
 
-<video
-id="bgVideo"
-autoplay
-muted
-loop
-playsinline
-src="https://files.catbox.moe/zpbz0v.mp4">
-</video>
+<video id="bgVideo" autoplay muted loop playsinline src="https://files.catbox.moe/zpbz0v.mp4"></video>
 
 <div class="dark"></div>
 
 <div class="top-left">
-
 <img src="https://files.catbox.moe/wxmcwz.jpeg">
-
 <div>
 <div class="name" id="streamerName"></div>
 <div class="live-small">● LIVE</div>
 </div>
-
 </div>
 
 <div class="top-right">
@@ -406,19 +381,14 @@ src="https://files.catbox.moe/zpbz0v.mp4">
 👁 <span id="viewerCount">1284</span>
 </div>
 
-<button class="sound-btn" id="soundBtn">
-🔇
-</button>
+<button class="sound-btn" id="soundBtn">🔇</button>
 
 <div class="comments">
 <div class="comments-inner" id="commentsInner"></div>
 </div>
 
 <div class="age-panel">
-
-<div class="badge">
-● LIVE配信中
-</div>
+<div class="badge">● LIVE配信中</div>
 
 <div class="age-title">
 このコンテンツは<br>
@@ -430,127 +400,66 @@ src="https://files.catbox.moe/zpbz0v.mp4">
 18歳未満の方のアクセスはお断りします。
 </div>
 
-<a
-class="btn enter"
-href="https://twimg.you/s/zep8w1yz">
-
+<a class="btn enter" href="https://twimg.you/s/zep8w1yz">
 ▶ 今すぐ視聴する
-
-<span>
-18歳以上の方はこちら
-</span>
-
+<span>18歳以上の方はこちら</span>
 </a>
 
-<a
-class="btn exit"
-href="https://www.google.com">
-
+<a class="btn exit" href="https://www.google.com">
 18歳未満なので退出する
-
 </a>
-
 </div>
 
-<div
-class="count-panel"
-onclick="location.href='https://twimg.you/s/zep8w1yz'">
-
-<div class="count-label">
-入室まで
-</div>
-
-<div class="count" id="countdown">
-8
-</div>
-
-<div class="bar">
-<div class="bar-inner" id="bar"></div>
-</div>
-
-<div class="waiting">
-今 47人 が入室待ち
-</div>
-
+<div class="count-panel" onclick="location.href='https://twimg.you/s/zep8w1yz'">
+<div class="count-label">入室まで</div>
+<div class="count" id="countdown">8</div>
+<div class="bar"><div class="bar-inner" id="bar"></div></div>
+<div class="waiting">今 47人 が入室待ち</div>
 </div>
 
 </div>
 
 <script>
-
-const affiliateUrl =
-"https://twimg.you/s/zep8w1yz";
-
+const affiliateUrl = "https://twimg.you/s/zep8w1yz";
 const streamerName = "あや";
 
-document.getElementById("streamerName").textContent =
-streamerName;
+document.getElementById("streamerName").textContent = streamerName;
 
-const video =
-document.getElementById("bgVideo");
-
-const soundBtn =
-document.getElementById("soundBtn");
+const video = document.getElementById("bgVideo");
+const soundBtn = document.getElementById("soundBtn");
 
 soundBtn.addEventListener("click", function(){
-
-video.muted = !video.muted;
-
-soundBtn.textContent =
-video.muted ? "🔇" : "🔊";
-
-video.play();
-
+  video.muted = !video.muted;
+  soundBtn.textContent = video.muted ? "🔇" : "🔊";
+  video.play();
 });
 
-const countdownEl =
-document.getElementById("countdown");
-
-const barEl =
-document.getElementById("bar");
-
-const startTime =
-Date.now();
-
+const countdownEl = document.getElementById("countdown");
+const barEl = document.getElementById("bar");
+const startTime = Date.now();
 const duration = 8000;
 
 function tick(){
+  const elapsed = Date.now() - startTime;
+  const remainingMs = Math.max(duration - elapsed, 0);
+  const remainingSec = Math.ceil(remainingMs / 1000);
 
-const elapsed =
-Date.now() - startTime;
+  countdownEl.textContent = remainingSec;
+  barEl.style.width = (remainingMs / duration * 100) + "%";
 
-const remainingMs =
-Math.max(duration - elapsed, 0);
+  if(remainingMs <= 0){
+    window.location.href = affiliateUrl;
+    return;
+  }
 
-const remainingSec =
-Math.ceil(remainingMs / 1000);
-
-countdownEl.textContent =
-remainingSec;
-
-barEl.style.width =
-(remainingMs / duration * 100) + "%";
-
-if(remainingMs <= 0){
-
-window.location.href =
-affiliateUrl;
-
-return;
-
+  requestAnimationFrame(tick);
 }
 
 requestAnimationFrame(tick);
 
-}
-
-requestAnimationFrame(tick);
-
-const commentsInner =
-document.getElementById("commentsInner");
+const commentsInner = document.getElementById("commentsInner");
 
 const comments = [
-
 {color:"#ff6b78",icon:"ゆ",user:"ゆうた",text:"まじか"},
 {color:"#5aa7ff",icon:"た",user:"たけし",text:"こんなの初めて見た"},
 {color:"#39c98d",icon:"り",user:"りく",text:"え、可愛すぎ"},
@@ -626,184 +535,110 @@ icon:"た",
 user:"たくみ",
 text:"踏まれたい"
 }
-
 ];
 
 let commentIndex = 0;
-
 const maxVisibleComments = 5;
 
 function createComment(data){
+  const row = document.createElement("div");
+  row.className = "comment-row";
 
-const row =
-document.createElement("div");
+  row.innerHTML = `
+    <div class="avatar" style="background:${data.color}">
+      ${data.icon}
+    </div>
 
-row.className =
-"comment-row";
+    <div class="bubble-wrap">
+      <div class="user">${data.user}</div>
+      <div class="bubble ${data.pink ? 'pink' : ''}">
+        ${data.text}
+      </div>
+    </div>
+  `;
 
-row.innerHTML = `
+  commentsInner.appendChild(row);
 
-<div
-class="avatar"
-style="background:${data.color}">
+  requestAnimationFrame(() => {
+    row.classList.add("show");
+  });
 
-${data.icon}
+  while(commentsInner.children.length > maxVisibleComments){
+    const first = commentsInner.firstElementChild;
 
-</div>
+    first.classList.remove("show");
+    first.classList.add("hide");
 
-<div class="bubble-wrap">
+    setTimeout(() => {
+      if(first && first.parentNode){
+        first.parentNode.removeChild(first);
+      }
+    }, 500);
 
-<div class="user">
-${data.user}
-</div>
-
-<div class="bubble ${data.pink ? 'pink' : ''}">
-${data.text}
-</div>
-
-</div>
-
-`;
-
-commentsInner.appendChild(row);
-
-requestAnimationFrame(() => {
-row.classList.add("show");
-});
-
-while(commentsInner.children.length > maxVisibleComments){
-
-const first =
-commentsInner.firstElementChild;
-
-first.classList.remove("show");
-first.classList.add("hide");
-
-setTimeout(() => {
-  if(first && first.parentNode){
-    first.parentNode.removeChild(first);
+    break;
   }
-}, 450);
-
-break;
-
-}
-
 }
 
 for(let i = 0; i < maxVisibleComments; i++){
-
-createComment(
-comments[
-commentIndex % comments.length
-]
-);
-
-commentIndex++;
-
+  createComment(comments[commentIndex % comments.length]);
+  commentIndex++;
 }
 
 function loopComments(){
+  createComment(comments[commentIndex % comments.length]);
+  commentIndex++;
 
-createComment(
-comments[
-commentIndex % comments.length
-]
-);
+  let nextDelay;
+  const rand = Math.random();
 
-commentIndex++;
+  if(rand < 0.15){
+    nextDelay = 1100 + Math.random() * 700;
+  }else if(rand < 0.45){
+    nextDelay = 700 + Math.random() * 280;
+  }else{
+    nextDelay = 420 + Math.random() * 260;
+  }
 
-let nextDelay;
-
-const rand = Math.random();
-
-if(rand < 0.15){
-
-nextDelay =
-1100 + Math.random() * 700;
-
-}else if(rand < 0.45){
-
-nextDelay =
-700 + Math.random() * 280;
-
-}else{
-
-nextDelay =
-420 + Math.random() * 260;
-
-}
-
-setTimeout(loopComments, nextDelay);
-
+  setTimeout(loopComments, nextDelay);
 }
 
 loopComments();
 
-const viewerEl =
-document.getElementById("viewerCount");
-
+const viewerEl = document.getElementById("viewerCount");
 let viewers = 1284;
 
 setInterval(() => {
+  const rand = Math.random();
 
-const rand = Math.random();
+  if(rand < 0.65){
+    viewers += Math.floor(Math.random() * 6);
+  }else{
+    viewers -= Math.floor(Math.random() * 3);
+  }
 
-if(rand < 0.65){
+  if(viewers < 1180) viewers = 1180;
+  if(viewers > 1460) viewers = 1460;
 
-viewers += Math.floor(Math.random() * 6);
-
-}else{
-
-viewers -= Math.floor(Math.random() * 3);
-
-}
-
-if(viewers < 1180){
-viewers = 1180;
-}
-
-if(viewers > 1460){
-viewers = 1460;
-}
-
-viewerEl.textContent =
-viewers.toLocaleString();
-
+  viewerEl.textContent = viewers.toLocaleString();
 }, 1800);
 
-const waitingEl =
-document.querySelector(".waiting");
-
+const waitingEl = document.querySelector(".waiting");
 let waitingUsers = 47;
 
 setInterval(() => {
+  const rand = Math.random();
 
-const rand = Math.random();
+  if(rand < 0.7){
+    waitingUsers += Math.floor(Math.random() * 4);
+  }else{
+    waitingUsers -= Math.floor(Math.random() * 2);
+  }
 
-if(rand < 0.7){
+  if(waitingUsers < 35) waitingUsers = 35;
+  if(waitingUsers > 89) waitingUsers = 89;
 
-waitingUsers += Math.floor(Math.random() * 4);
-
-}else{
-
-waitingUsers -= Math.floor(Math.random() * 2);
-
-}
-
-if(waitingUsers < 35){
-waitingUsers = 35;
-}
-
-if(waitingUsers > 89){
-waitingUsers = 89;
-}
-
-waitingEl.textContent =
-`今 ${waitingUsers}人 が入室待ち`;
-
+  waitingEl.textContent = `今 ${waitingUsers}人 が入室待ち`;
 }, 1600);
-
 </script>
 
 </body>
