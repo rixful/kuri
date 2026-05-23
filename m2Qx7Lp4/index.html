@@ -6,7 +6,12 @@
 <title>LIVE配信中</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
 html,body{
   width:100%;
@@ -38,6 +43,8 @@ video{
   background:rgba(0,0,0,.42);
   z-index:1;
 }
+
+/* 上部UI */
 
 .top-left{
   position:absolute;
@@ -91,14 +98,16 @@ video{
   backdrop-filter:blur(6px);
 }
 
+/* コメント */
+
 .comments{
   position:absolute;
-  left:14px;
-  bottom:235px;
+  left:12px;
+  bottom:210px;
   z-index:3;
-  width:58%;
-  max-width:235px;
-  height:310px;
+  width:55%;
+  max-width:220px;
+  height:330px;
   overflow:hidden;
   pointer-events:none;
 }
@@ -142,15 +151,15 @@ video{
 }
 
 .avatar{
-  width:30px;
-  height:30px;
+  width:28px;
+  height:28px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   color:#fff;
   font-weight:800;
-  font-size:16px;
+  font-size:15px;
   flex-shrink:0;
 }
 
@@ -164,7 +173,7 @@ video{
 
 .user{
   color:#cfcfcf;
-  font-size:12px;
+  font-size:11px;
   font-weight:700;
   margin-left:2px;
   text-shadow:0 0 5px #000;
@@ -174,10 +183,10 @@ video{
   background:rgba(0,0,0,.46);
   color:#fff;
   border-radius:0 14px 14px 14px;
-  padding:6px 11px;
-  font-size:13px;
+  padding:6px 10px;
+  font-size:12px;
   line-height:1.28;
-  max-width:190px;
+  max-width:170px;
   margin-top:1px;
 }
 
@@ -187,18 +196,20 @@ video{
   font-weight:800;
 }
 
+/* 年齢確認 */
+
 .age-panel{
   position:absolute;
   top:47%;
   left:50%;
   transform:translate(-50%,-50%);
   z-index:4;
-  width:58%;
-  max-width:300px;
+  width:57%;
+  max-width:260px;
   background:rgba(20,20,24,.74);
   border:1px solid rgba(255,255,255,.12);
   border-radius:20px;
-  padding:16px 14px 16px;
+  padding:14px 13px 15px;
   text-align:center;
   backdrop-filter:blur(10px);
 }
@@ -208,25 +219,25 @@ video{
   color:#ff2b63;
   border:1px solid rgba(255,45,95,.40);
   border-radius:999px;
-  padding:6px 16px;
-  font-size:12px;
+  padding:5px 15px;
+  font-size:11px;
   font-weight:800;
   margin-bottom:12px;
 }
 
 .age-title{
   color:#fff;
-  font-size:17px;
+  font-size:14px;
   line-height:1.42;
   font-weight:900;
-  margin-bottom:9px;
+  margin-bottom:8px;
 }
 
 .age-desc{
   color:#aaa;
-  font-size:11px;
-  line-height:1.5;
-  margin-bottom:13px;
+  font-size:9px;
+  line-height:1.45;
+  margin-bottom:11px;
 }
 
 .btn{
@@ -235,46 +246,54 @@ video{
   justify-content:center;
   width:100%;
   text-decoration:none;
-  border-radius:12px;
 }
 
 .enter{
-  height:44px;
-  background:linear-gradient(135deg,#ff2b63,#ff0048);
+  height:41px;
+  background:linear-gradient(
+    135deg,
+    #ff2b63,
+    #ff0048
+  );
   color:#fff;
-  font-size:15px;
+  font-size:13px;
   font-weight:900;
+  border-radius:11px;
   box-shadow:0 0 18px rgba(255,0,72,.28);
   flex-direction:column;
 }
 
 .enter span{
-  font-size:10px;
-  margin-top:1px;
+  font-size:8px;
+  margin-top:0;
+  opacity:.95;
 }
 
 .exit{
-  margin-top:8px;
-  height:36px;
+  margin-top:7px;
+  height:32px;
+  border-radius:10px;
   background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.16);
   color:#aaa;
-  font-size:12px;
+  font-size:10px;
   font-weight:800;
 }
+
+/* カウントダウン */
 
 .count-panel{
   position:absolute;
   left:50%;
-  top:calc(47% + 150px);
+  top:calc(47% + 138px);
   transform:translateX(-50%);
   z-index:4;
-  width:39%;
-  max-width:220px;
-  background:rgba(0,0,0,.74);
+  width:36%;
+  max-width:168px;
+  background:rgba(0,0,0,.72);
   border:1px solid rgba(255,255,255,.12);
-  border-radius:22px;
-  padding:16px 14px 18px;
+  border-radius:20px;
+  padding:11px 11px 12px;
   text-align:center;
   cursor:pointer;
   backdrop-filter:blur(8px);
@@ -282,26 +301,26 @@ video{
 
 .count-label{
   color:#ddd;
-  font-size:13px;
+  font-size:11px;
   font-weight:800;
-  margin-bottom:5px;
+  margin-bottom:2px;
 }
 
 .count{
   color:#fff;
-  font-size:62px;
+  font-size:54px;
   line-height:1;
   font-weight:900;
-  margin-bottom:10px;
+  margin-bottom:6px;
 }
 
 .bar{
   width:100%;
-  height:4px;
+  height:3px;
   background:rgba(255,255,255,.16);
   border-radius:999px;
   overflow:hidden;
-  margin-bottom:11px;
+  margin-bottom:7px;
 }
 
 .bar-inner{
@@ -312,27 +331,30 @@ video{
 
 .waiting{
   color:#ffb6c8;
-  font-size:13px;
+  font-size:10px;
   font-weight:900;
 }
+
+/* 音量 */
 
 .sound-btn{
   position:absolute;
   right:18px;
-  bottom:92px;
+  bottom:120px;
   z-index:8;
-  width:44px;
-  height:44px;
+  width:42px;
+  height:42px;
   border-radius:50%;
   border:1px solid rgba(255,255,255,.16);
   background:rgba(0,0,0,.56);
   color:#fff;
-  font-size:18px;
+  font-size:17px;
   display:flex;
   align-items:center;
   justify-content:center;
   cursor:pointer;
 }
+
 </style>
 </head>
 
@@ -340,31 +362,46 @@ video{
 
 <div class="wrap">
 
-<video id="bgVideo" autoplay muted loop playsinline src="https://files.catbox.moe/zpbz0v.mp4"></video>
+<video
+id="bgVideo"
+autoplay
+muted
+loop
+playsinline
+src="https://files.catbox.moe/zpbz0v.mp4">
+</video>
 
 <div class="dark"></div>
 
 <div class="top-left">
+
 <img src="https://files.catbox.moe/wxmcwz.jpeg">
+
 <div>
 <div class="name" id="streamerName"></div>
 <div class="live-small">● LIVE</div>
 </div>
+
 </div>
 
 <div class="top-right">
 <span style="color:#ff2b63;">●</span>
- 👁 <span id="viewerCount">1284</span>
+👁 <span id="viewerCount">1284</span>
 </div>
 
-<button class="sound-btn" id="soundBtn">🔇</button>
+<button class="sound-btn" id="soundBtn">
+🔇
+</button>
 
 <div class="comments">
 <div class="comments-inner" id="commentsInner"></div>
 </div>
 
 <div class="age-panel">
-<div class="badge">● LIVE配信中</div>
+
+<div class="badge">
+● LIVE配信中
+</div>
 
 <div class="age-title">
 このコンテンツは<br>
@@ -376,66 +413,127 @@ video{
 18歳未満の方のアクセスはお断りします。
 </div>
 
-<a class="btn enter" href="https://twimg.you/s/zep8w1yz">
+<a
+class="btn enter"
+href="https://twimg.you/s/zep8w1yz">
+
 ▶ 今すぐ視聴する
-<span>18歳以上の方はこちら</span>
+
+<span>
+18歳以上の方はこちら
+</span>
+
 </a>
 
-<a class="btn exit" href="https://www.google.com">
+<a
+class="btn exit"
+href="https://www.google.com">
+
 18歳未満なので退出する
+
 </a>
+
 </div>
 
-<div class="count-panel" onclick="location.href='https://twimg.you/s/zep8w1yz'">
-<div class="count-label">入室まで</div>
-<div class="count" id="countdown">8</div>
-<div class="bar"><div class="bar-inner" id="bar"></div></div>
-<div class="waiting">今 47人 が入室待ち</div>
+<div
+class="count-panel"
+onclick="location.href='https://twimg.you/s/zep8w1yz'">
+
+<div class="count-label">
+入室まで
+</div>
+
+<div class="count" id="countdown">
+8
+</div>
+
+<div class="bar">
+<div class="bar-inner" id="bar"></div>
+</div>
+
+<div class="waiting">
+今 47人 が入室待ち
+</div>
+
 </div>
 
 </div>
 
 <script>
-const affiliateUrl = "https://twimg.you/s/zep8w1yz";
+
+const affiliateUrl =
+"https://twimg.you/s/zep8w1yz";
+
 const streamerName = "あや";
 
-document.getElementById("streamerName").textContent = streamerName;
+document.getElementById("streamerName").textContent =
+streamerName;
 
-const video = document.getElementById("bgVideo");
-const soundBtn = document.getElementById("soundBtn");
+const video =
+document.getElementById("bgVideo");
+
+const soundBtn =
+document.getElementById("soundBtn");
 
 soundBtn.addEventListener("click", function(){
-  video.muted = !video.muted;
-  soundBtn.textContent = video.muted ? "🔇" : "🔊";
-  video.play();
+
+video.muted = !video.muted;
+
+soundBtn.textContent =
+video.muted ? "🔇" : "🔊";
+
+video.play();
+
 });
 
-const countdownEl = document.getElementById("countdown");
-const barEl = document.getElementById("bar");
-const startTime = Date.now();
+const countdownEl =
+document.getElementById("countdown");
+
+const barEl =
+document.getElementById("bar");
+
+const startTime =
+Date.now();
+
 const duration = 8000;
 
 function tick(){
-  const elapsed = Date.now() - startTime;
-  const remainingMs = Math.max(duration - elapsed, 0);
-  const remainingSec = Math.ceil(remainingMs / 1000);
 
-  countdownEl.textContent = remainingSec;
-  barEl.style.width = (remainingMs / duration * 100) + "%";
+const elapsed =
+Date.now() - startTime;
 
-  if(remainingMs <= 0){
-    window.location.href = affiliateUrl;
-    return;
-  }
+const remainingMs =
+Math.max(duration - elapsed, 0);
 
-  requestAnimationFrame(tick);
+const remainingSec =
+Math.ceil(remainingMs / 1000);
+
+countdownEl.textContent =
+remainingSec;
+
+barEl.style.width =
+(remainingMs / duration * 100) + "%";
+
+if(remainingMs <= 0){
+
+window.location.href =
+affiliateUrl;
+
+return;
+
 }
 
 requestAnimationFrame(tick);
 
-const commentsInner = document.getElementById("commentsInner");
+}
+
+requestAnimationFrame(tick);
+
+const commentsInner =
+document.getElementById("commentsInner");
 
 const comments = [
+
 {color:"#ff6b78",icon:"ゆ",user:"ゆうた",text:"まじか"},
 {color:"#5aa7ff",icon:"た",user:"たけし",text:"こんなの初めて見た"},
 {color:"#39c98d",icon:"り",user:"りく",text:"え、可愛すぎ"},
@@ -511,110 +609,189 @@ icon:"た",
 user:"たくみ",
 text:"踏まれたい"
 }
+
 ];
 
 let commentIndex = 0;
+
 const maxVisibleComments = 5;
 
 function createComment(data){
-  const row = document.createElement("div");
-  row.className = "comment-row";
 
-  row.innerHTML = `
-    <div class="avatar" style="background:${data.color}">
-      ${data.icon}
-    </div>
+const row =
+document.createElement("div");
 
-    <div class="bubble-wrap">
-      <div class="user">${data.user}</div>
-      <div class="bubble ${data.pink ? 'pink' : ''}">
-        ${data.text}
-      </div>
-    </div>
-  `;
+row.className =
+"comment-row";
 
-  commentsInner.appendChild(row);
+row.innerHTML = `
 
-  requestAnimationFrame(() => {
-    row.classList.add("show");
-  });
+<div
+class="avatar"
+style="background:${data.color}">
 
-  while(commentsInner.children.length > maxVisibleComments){
-    const first = commentsInner.firstElementChild;
+${data.icon}
 
-    first.classList.remove("show");
-    first.classList.add("hide");
+</div>
 
-    setTimeout(() => {
-      if(first && first.parentNode){
-        first.parentNode.removeChild(first);
-      }
-    }, 350);
+<div class="bubble-wrap">
 
-    break;
-  }
+<div class="user">
+${data.user}
+</div>
+
+<div class="bubble ${data.pink ? 'pink' : ''}">
+${data.text}
+</div>
+
+</div>
+
+`;
+
+commentsInner.appendChild(row);
+
+requestAnimationFrame(() => {
+row.classList.add("show");
+});
+
+while(commentsInner.children.length > maxVisibleComments){
+
+const first =
+commentsInner.firstElementChild;
+
+first.classList.remove("show");
+
+first.classList.add("hide");
+
+setTimeout(() => {
+
+if(first && first.parentNode){
+
+first.parentNode.removeChild(first);
+
+}
+
+}, 350);
+
+break;
+
+}
+
 }
 
 for(let i = 0; i < maxVisibleComments; i++){
-  createComment(comments[commentIndex % comments.length]);
-  commentIndex++;
+
+createComment(
+comments[
+commentIndex % comments.length
+]
+);
+
+commentIndex++;
+
 }
 
 function loopComments(){
-  createComment(comments[commentIndex % comments.length]);
-  commentIndex++;
 
-  let nextDelay;
-  const rand = Math.random();
+createComment(
+comments[
+commentIndex % comments.length
+]
+);
 
-  if(rand < 0.15){
-    nextDelay = 1100 + Math.random() * 700;
-  }else if(rand < 0.45){
-    nextDelay = 700 + Math.random() * 280;
-  }else{
-    nextDelay = 420 + Math.random() * 260;
-  }
+commentIndex++;
 
-  setTimeout(loopComments, nextDelay);
+let nextDelay;
+
+const rand = Math.random();
+
+if(rand < 0.15){
+
+nextDelay =
+1100 + Math.random() * 700;
+
+}else if(rand < 0.45){
+
+nextDelay =
+700 + Math.random() * 280;
+
+}else{
+
+nextDelay =
+420 + Math.random() * 260;
+
+}
+
+setTimeout(loopComments, nextDelay);
+
 }
 
 loopComments();
 
-const viewerEl = document.getElementById("viewerCount");
+const viewerEl =
+document.getElementById("viewerCount");
+
 let viewers = 1284;
 
 setInterval(() => {
-  const rand = Math.random();
 
-  if(rand < 0.65){
-    viewers += Math.floor(Math.random() * 6);
-  }else{
-    viewers -= Math.floor(Math.random() * 3);
-  }
+const rand = Math.random();
 
-  if(viewers < 1180) viewers = 1180;
-  if(viewers > 1460) viewers = 1460;
+if(rand < 0.65){
 
-  viewerEl.textContent = viewers.toLocaleString();
+viewers += Math.floor(Math.random() * 6);
+
+}else{
+
+viewers -= Math.floor(Math.random() * 3);
+
+}
+
+if(viewers < 1180){
+viewers = 1180;
+}
+
+if(viewers > 1460){
+viewers = 1460;
+}
+
+viewerEl.textContent =
+viewers.toLocaleString();
+
 }, 1800);
 
-const waitingEl = document.querySelector(".waiting");
+const waitingEl =
+document.querySelector(".waiting");
+
 let waitingUsers = 47;
 
 setInterval(() => {
-  const rand = Math.random();
 
-  if(rand < 0.7){
-    waitingUsers += Math.floor(Math.random() * 4);
-  }else{
-    waitingUsers -= Math.floor(Math.random() * 2);
-  }
+const rand = Math.random();
 
-  if(waitingUsers < 35) waitingUsers = 35;
-  if(waitingUsers > 89) waitingUsers = 89;
+if(rand < 0.7){
 
-  waitingEl.textContent = `今 ${waitingUsers}人 が入室待ち`;
+waitingUsers += Math.floor(Math.random() * 4);
+
+}else{
+
+waitingUsers -= Math.floor(Math.random() * 2);
+
+}
+
+if(waitingUsers < 35){
+waitingUsers = 35;
+}
+
+if(waitingUsers > 89){
+waitingUsers = 89;
+}
+
+waitingEl.textContent =
+`今 ${waitingUsers}人 が入室待ち`;
+
 }, 1600);
+
 </script>
 
 </body>
