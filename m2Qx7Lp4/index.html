@@ -40,85 +40,74 @@ video{
 .dark{
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.38);
+  background:rgba(0,0,0,.42);
   z-index:1;
 }
 
+/* 上部UI */
+
 .top-left{
   position:absolute;
-  top:30px;
-  left:18px;
+  top:34px;
+  left:16px;
   z-index:3;
   display:flex;
   align-items:center;
-  gap:10px;
-  background:rgba(10,10,10,.64);
-  border:1px solid rgba(255,255,255,.12);
+  gap:8px;
+  background:rgba(10,10,10,.58);
+  border:1px solid rgba(255,255,255,.10);
   border-radius:999px;
-  padding:8px 14px 8px 8px;
+  padding:6px 12px 6px 6px;
+  backdrop-filter:blur(6px);
 }
 
 .top-left img{
-  width:48px;
-  height:48px;
+  width:40px;
+  height:40px;
   border-radius:50%;
   object-fit:cover;
 }
 
 .name{
   color:#fff;
-  font-size:18px;
+  font-size:15px;
   font-weight:800;
+  line-height:1;
 }
 
 .live-small{
-  margin-top:2px;
+  margin-top:4px;
   color:#ff2b63;
-  font-size:13px;
+  font-size:11px;
   font-weight:800;
-  letter-spacing:2px;
+  letter-spacing:1px;
 }
 
 .top-right{
   position:absolute;
-  top:38px;
-  right:18px;
+  top:40px;
+  right:16px;
   z-index:3;
   color:#fff;
-  background:rgba(120,20,40,.64);
-  border:1px solid rgba(255,45,95,.45);
+  background:rgba(120,20,40,.55);
+  border:1px solid rgba(255,45,95,.32);
   border-radius:999px;
-  padding:10px 18px;
-  font-size:20px;
+  padding:8px 15px;
+  font-size:16px;
   font-weight:700;
+  backdrop-filter:blur(6px);
 }
 
-.sound-btn{
-  position:absolute;
-  right:18px;
-  bottom:34px;
-  z-index:8;
-  width:54px;
-  height:54px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.62);
-  color:#fff;
-  font-size:24px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
+/* コメント */
 
 .comments{
   position:absolute;
   left:12px;
-  bottom:205px;
+  bottom:185px;
   z-index:3;
-  width:54%;
-  max-width:185px;
-  height:200px;
+  width:48%;
+  max-width:190px;
+  height:360px;
   overflow:hidden;
   pointer-events:none;
 }
@@ -203,45 +192,48 @@ video{
   font-weight:800;
 }
 
+/* 年齢パネル */
+
 .age-panel{
   position:absolute;
-  top:43%;
+  top:47%;
   left:50%;
   transform:translate(-50%,-50%);
   z-index:4;
-  width:86%;
-  max-width:370px;
-  background:rgba(25,25,28,.76);
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:24px;
-  padding:22px 18px 26px;
+  width:58%;
+  max-width:300px;
+  background:rgba(20,20,24,.72);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:20px;
+  padding:16px 14px 18px;
   text-align:center;
+  backdrop-filter:blur(10px);
 }
 
 .badge{
   display:inline-block;
   color:#ff2b63;
-  border:1px solid rgba(255,45,95,.55);
+  border:1px solid rgba(255,45,95,.40);
   border-radius:999px;
-  padding:7px 20px;
-  font-size:14px;
+  padding:6px 16px;
+  font-size:12px;
   font-weight:800;
-  margin-bottom:18px;
+  margin-bottom:14px;
 }
 
 .age-title{
   color:#fff;
-  font-size:22px;
+  font-size:17px;
   line-height:1.45;
   font-weight:900;
-  margin-bottom:14px;
+  margin-bottom:10px;
 }
 
 .age-desc{
   color:#aaa;
-  font-size:14px;
-  line-height:1.6;
-  margin-bottom:20px;
+  font-size:11px;
+  line-height:1.55;
+  margin-bottom:14px;
 }
 
 .btn{
@@ -249,92 +241,112 @@ video{
   align-items:center;
   justify-content:center;
   width:100%;
-  height:58px;
-  border-radius:15px;
   text-decoration:none;
-  font-size:19px;
-  font-weight:900;
+  border-radius:12px;
 }
 
 .enter{
+  height:45px;
   background:linear-gradient(
     135deg,
     #ff2b63,
     #ff0048
   );
   color:#fff;
-  box-shadow:0 0 24px rgba(255,0,72,.35);
+  font-size:15px;
+  font-weight:900;
+  box-shadow:0 0 18px rgba(255,0,72,.28);
   flex-direction:column;
-  gap:2px;
 }
 
 .enter span{
-  display:block;
-  font-size:12px;
-  font-weight:700;
-  opacity:.9;
+  font-size:10px;
+  margin-top:1px;
 }
 
 .exit{
-  margin-top:12px;
-  height:46px;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.20);
+  margin-top:8px;
+  height:38px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.16);
   color:#aaa;
-  font-size:15px;
+  font-size:12px;
+  font-weight:800;
 }
+
+/* カウントダウン */
 
 .count-panel{
   position:absolute;
   left:50%;
-  bottom:45px;
+  bottom:50px;
   transform:translateX(-50%);
   z-index:4;
-  width:58%;
-  max-width:280px;
-  background:rgba(0,0,0,.74);
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:24px;
-  padding:20px 18px 22px;
+  width:39%;
+  max-width:220px;
+  background:rgba(0,0,0,.72);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:22px;
+  padding:16px 14px 18px;
   text-align:center;
   cursor:pointer;
+  backdrop-filter:blur(8px);
 }
 
 .count-label{
   color:#ddd;
-  font-size:16px;
+  font-size:13px;
   font-weight:800;
-  margin-bottom:6px;
+  margin-bottom:4px;
 }
 
 .count{
   color:#fff;
-  font-size:74px;
-  line-height:.95;
+  font-size:62px;
+  line-height:1;
   font-weight:900;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 .bar{
   width:100%;
-  height:5px;
-  background:rgba(255,255,255,.22);
+  height:4px;
+  background:rgba(255,255,255,.16);
   border-radius:999px;
   overflow:hidden;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
 
 .bar-inner{
   width:100%;
   height:100%;
   background:#ff2b63;
-  border-radius:999px;
 }
 
 .waiting{
   color:#ffb6c8;
-  font-size:17px;
+  font-size:13px;
   font-weight:900;
+}
+
+/* 音量ボタン */
+
+.sound-btn{
+  position:absolute;
+  right:18px;
+  bottom:34px;
+  z-index:8;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(0,0,0,.56);
+  color:#fff;
+  font-size:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
 }
 
 </style>
@@ -368,7 +380,7 @@ src="https://files.catbox.moe/zpbz0v.mp4">
 
 <div class="top-right">
 <span style="color:#ff2b63;">●</span>
-👁 <span id="viewerCount">1284</span>
+ 👁 <span id="viewerCount">1284</span>
 </div>
 
 <button class="sound-btn" id="soundBtn">
@@ -425,17 +437,12 @@ onclick="location.href='https://twimg.you/s/zep8w1yz'">
 入室まで
 </div>
 
-<div
-class="count"
-id="countdown">
+<div class="count" id="countdown">
 8
 </div>
 
 <div class="bar">
-<div
-class="bar-inner"
-id="bar">
-</div>
+<div class="bar-inner" id="bar"></div>
 </div>
 
 <div class="waiting">
@@ -505,7 +512,6 @@ if(remainingMs <= 0){
 
 window.location.href =
 affiliateUrl;
-
 return;
 
 }
@@ -595,69 +601,6 @@ color:"#3ccf91",
 icon:"た",
 user:"たくみ",
 text:"踏まれたい"
-},
-
-{
-color:"#ff3f7f",
-icon:"な",
-user:"なおき",
-text:"もう我慢できん"
-},
-
-{
-color:"#8f66ff",
-icon:"あ",
-user:"あおい",
-text:"こういうの待ってた"
-},
-
-{
-color:"#ff5959",
-icon:"し",
-user:"しん",
-text:"ゾクゾクする"
-},
-
-{
-color:"#00bfff",
-icon:"り",
-user:"りょう",
-text:"めっちゃ煽られたい"
-},
-
-{
-color:"#ff66c4",
-icon:"こ",
-user:"こうき",
-text:"ドMにはたまらん"
-},
-
-{
-color:"#4ecdc4",
-icon:"ま",
-user:"まさき",
-text:"これクセになる"
-},
-
-{
-color:"#f7b731",
-icon:"し",
-user:"しゅう",
-text:"声かわいすぎん？"
-},
-
-{
-color:"#7fff7f",
-icon:"は",
-user:"はやと",
-text:"続き気になる"
-},
-
-{
-color:"#ff884d",
-icon:"ゆ",
-user:"ゆきと",
-text:"これやばいな"
 }
 
 ];
