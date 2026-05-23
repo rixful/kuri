@@ -103,11 +103,12 @@ video{
 .comments{
   position:absolute;
   left:12px;
-  bottom:210px;
+  top:95px;
+  bottom:auto;
   z-index:3;
   width:55%;
   max-width:220px;
-  height:330px;
+  height:520px;
   overflow:hidden;
   pointer-events:none;
 }
@@ -127,14 +128,14 @@ video{
   align-items:flex-start;
   gap:7px;
   opacity:0;
-  transform:translateY(18px);
+  transform:translateY(16px);
   max-height:68px;
   overflow:hidden;
   transition:
-    opacity .35s ease,
-    transform .35s ease,
-    max-height .35s ease,
-    margin .35s ease;
+    opacity .65s ease,
+    transform .65s ease,
+    max-height .65s ease,
+    margin .65s ease;
 }
 
 .comment-row.show{
@@ -145,7 +146,7 @@ video{
 
 .comment-row.hide{
   opacity:0;
-  transform:translateY(-10px);
+  transform:translateY(-18px);
   max-height:0;
   margin:0;
 }
@@ -340,7 +341,7 @@ video{
 .sound-btn{
   position:absolute;
   right:18px;
-  bottom:120px;
+  bottom:82px;
   z-index:8;
   width:42px;
   height:42px;
@@ -671,7 +672,7 @@ first.parentNode.removeChild(first);
 
 }
 
-}, 350);
+}, 650);
 
 break;
 
