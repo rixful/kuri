@@ -103,7 +103,7 @@ video{
 .comments{
   position:absolute;
   left:12px;
-  top:95px;
+  top:88px;
   bottom:auto;
   z-index:3;
   width:55%;
@@ -111,6 +111,22 @@ video{
   height:520px;
   overflow:hidden;
   pointer-events:none;
+
+  -webkit-mask-image:linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 12%,
+    black 82%,
+    transparent 100%
+  );
+
+  mask-image:linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 12%,
+    black 82%,
+    transparent 100%
+  );
 }
 
 .comments-inner{
@@ -129,14 +145,26 @@ video{
   gap:7px;
   opacity:0;
   transform:translateY(16px);
+  max-height:68px;
+  overflow:hidden;
   transition:
-    opacity .35s ease,
-    transform .35s ease;
+    opacity .45s ease,
+    transform .45s ease,
+    max-height .45s ease,
+    margin .45s ease;
 }
 
 .comment-row.show{
   opacity:1;
   transform:translateY(0);
+  max-height:68px;
+}
+
+.comment-row.hide{
+  opacity:0;
+  transform:translateY(-16px);
+  max-height:0;
+  margin:0;
 }
 
 .avatar{
@@ -648,9 +676,16 @@ while(commentsInner.children.length > maxVisibleComments){
 const first =
 commentsInner.firstElementChild;
 
-if(first){
-  commentsInner.removeChild(first);
-}
+first.classList.remove("show");
+first.classList.add("hide");
+
+setTimeout(() => {
+  if(first && first.parentNode){
+    first.parentNode.removeChild(first);
+  }
+}, 450);
+
+break;
 
 }
 
