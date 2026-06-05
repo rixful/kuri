@@ -52,9 +52,11 @@
   <div id="overlay" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); align-items:center; justify-content:center; z-index:50;">
     <div class="bg-white/10 backdrop-blur-md rounded-3xl px-8 py-10 text-center max-w-[320px] w-full mx-4 border border-white/30">
 
-      <p id="deliveryTime" class="text-white text-2xl font-bold mb-3"></p>
+      <p class="text-white text-xl font-bold mb-1">
+        フル配信はこちら
+      </p>
 
-      <p id="randomText" class="text-white/70 text-sm mb-8">
+      <p class="text-white/70 text-sm mb-8">
         (るかで検索 🔎)
       </p>
 
@@ -74,28 +76,8 @@
     const soundBtn = document.getElementById('soundBtn');
     const overlay = document.getElementById('overlay');
     const countdownEl = document.getElementById('countdown');
-    const deliveryTimeEl = document.getElementById('deliveryTime');
-    const randomText = document.getElementById('randomText');
 
     const AFFILIATE_URL = "https://twimg.you/s/ebks8vhp";
-
-    // 3分後表示
-    function setDeliveryTime() {
-      const now = new Date();
-      now.setMinutes(now.getMinutes() + 3);
-
-      let hour = now.getHours();
-      const minute = now.getMinutes().toString().padStart(2, '0');
-
-      const hourStr = (hour === 0) ? "0" : hour;
-
-      deliveryTimeEl.textContent = `${hourStr}:${minute}より配信開始`;
-    }
-
-    // るか固定
-    function setRandomName() {
-      randomText.textContent = "(るかで検索 🔎)";
-    }
 
     let isMuted = true;
 
@@ -108,44 +90,30 @@
         : "🔇 音声OFF";
     });
 
-    // 動画再生開始から7秒後に表示
     video.addEventListener('play', function handler() {
-
       if (overlay.style.display !== 'flex') {
-
         setTimeout(() => {
-          setDeliveryTime();
-          setRandomName();
           overlay.style.display = 'flex';
           startCountdown();
         }, 7000);
-
       }
 
       video.removeEventListener('play', handler);
-
     }, { once: true });
 
     let timeLeft = 6;
 
     function startCountdown() {
-
       const timer = setInterval(() => {
-
         timeLeft--;
 
         countdownEl.textContent = `${timeLeft}秒後に移動`;
 
         if (timeLeft <= 0) {
-
           clearInterval(timer);
-
           window.location.href = AFFILIATE_URL;
-
         }
-
       }, 1000);
-
     }
 
     window.goToAffiliate = () => {
