@@ -1,848 +1,135 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>LIVE配信中</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>フル配信はこちら</title>
+  <meta name="theme-color" content="#000000">
+  <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+      height: 100vh;
+    }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+    video {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
 
-html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:#000;
-  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
-}
-
-.wrap{
-  position:relative;
-  width:100vw;
-  height:100vh;
-  overflow:hidden;
-  background:#000;
-}
-
-video{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.dark{
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.38);
-  z-index:1;
-}
-
-.top-left{
-  position:absolute;
-  top:30px;
-  left:18px;
-  z-index:3;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  background:rgba(10,10,10,.64);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:999px;
-  padding:8px 14px 8px 8px;
-}
-
-.top-left img{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  object-fit:cover;
-}
-
-.name{
-  color:#fff;
-  font-size:18px;
-  font-weight:800;
-}
-
-.live-small{
-  margin-top:2px;
-  color:#ff2b63;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:2px;
-}
-
-.top-right{
-  position:absolute;
-  top:38px;
-  right:18px;
-  z-index:3;
-  color:#fff;
-  background:rgba(120,20,40,.64);
-  border:1px solid rgba(255,45,95,.45);
-  border-radius:999px;
-  padding:10px 18px;
-  font-size:20px;
-  font-weight:700;
-}
-
-.sound-btn{
-  position:absolute;
-  right:18px;
-  bottom:34px;
-  z-index:8;
-  width:54px;
-  height:54px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.22);
-  background:rgba(0,0,0,.62);
-  color:#fff;
-  font-size:24px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
-
-.comments{
-  position:absolute;
-  left:12px;
-  bottom:205px;
-  z-index:3;
-  width:54%;
-  max-width:185px;
-  height:200px;
-  overflow:hidden;
-  pointer-events:none;
-}
-
-.comments-inner{
-  position:absolute;
-  left:0;
-  bottom:0;
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.comment-row{
-  display:flex;
-  align-items:flex-end;
-  gap:6px;
-  opacity:0;
-  transform:translateY(18px);
-  max-height:52px;
-  overflow:hidden;
-  transition:
-    opacity .35s ease,
-    transform .35s ease,
-    max-height .35s ease,
-    margin .35s ease;
-}
-
-.comment-row.show{
-  opacity:1;
-  transform:translateY(0);
-  max-height:52px;
-}
-
-.comment-row.hide{
-  opacity:0;
-  transform:translateY(-10px);
-  max-height:0;
-  margin:0;
-}
-
-.avatar{
-  width:24px;
-  height:24px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  font-weight:800;
-  font-size:13px;
-  flex-shrink:0;
-}
-
-.bubble-wrap{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-}
-
-.user{
-  color:#cfcfcf;
-  font-size:10px;
-  font-weight:700;
-  text-shadow:0 0 6px #000;
-}
-
-.bubble{
-  background:rgba(0,0,0,.42);
-  color:#fff;
-  border-radius:0 12px 12px 12px;
-  padding:5px 9px;
-  font-size:11px;
-  line-height:1.25;
-  max-width:145px;
-}
-
-.bubble.pink{
-  background:rgba(150,18,48,.50);
-  border:1px solid rgba(255,55,95,.30);
-  font-weight:800;
-}
-
-.age-panel{
-  position:absolute;
-  top:43%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  z-index:4;
-  width:86%;
-  max-width:370px;
-  background:rgba(25,25,28,.76);
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:24px;
-  padding:22px 18px 26px;
-  text-align:center;
-}
-
-.badge{
-  display:inline-block;
-  color:#ff2b63;
-  border:1px solid rgba(255,45,95,.55);
-  border-radius:999px;
-  padding:7px 20px;
-  font-size:14px;
-  font-weight:800;
-  margin-bottom:18px;
-}
-
-.age-title{
-  color:#fff;
-  font-size:22px;
-  line-height:1.45;
-  font-weight:900;
-  margin-bottom:14px;
-}
-
-.age-desc{
-  color:#aaa;
-  font-size:14px;
-  line-height:1.6;
-  margin-bottom:20px;
-}
-
-.btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:100%;
-  height:58px;
-  border-radius:15px;
-  text-decoration:none;
-  font-size:19px;
-  font-weight:900;
-}
-
-.enter{
-  background:linear-gradient(
-    135deg,
-    #ff2b63,
-    #ff0048
-  );
-  color:#fff;
-  box-shadow:0 0 24px rgba(255,0,72,.35);
-  flex-direction:column;
-  gap:2px;
-}
-
-.enter span{
-  display:block;
-  font-size:12px;
-  font-weight:700;
-  opacity:.9;
-}
-
-.exit{
-  margin-top:12px;
-  height:46px;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.20);
-  color:#aaa;
-  font-size:15px;
-}
-
-.count-panel{
-  position:absolute;
-  left:50%;
-  bottom:45px;
-  transform:translateX(-50%);
-  z-index:4;
-  width:58%;
-  max-width:280px;
-  background:rgba(0,0,0,.74);
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:24px;
-  padding:20px 18px 22px;
-  text-align:center;
-  cursor:pointer;
-}
-
-.count-label{
-  color:#ddd;
-  font-size:16px;
-  font-weight:800;
-  margin-bottom:6px;
-}
-
-.count{
-  color:#fff;
-  font-size:74px;
-  line-height:.95;
-  font-weight:900;
-  margin-bottom:12px;
-}
-
-.bar{
-  width:100%;
-  height:5px;
-  background:rgba(255,255,255,.22);
-  border-radius:999px;
-  overflow:hidden;
-  margin-bottom:14px;
-}
-
-.bar-inner{
-  width:100%;
-  height:100%;
-  background:#ff2b63;
-  border-radius:999px;
-}
-
-.waiting{
-  color:#ffb6c8;
-  font-size:17px;
-  font-weight:900;
-}
-
-</style>
+    .sound-btn {
+      position: absolute;
+      bottom: 22%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.95);
+      color: #000;
+      border: 2px solid #000;
+      border-radius: 9999px;
+      padding: 14px 36px;
+      font-size: 19px;
+      font-weight: bold;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      z-index: 30;
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="wrap">
+  <video id="myVideo" autoplay muted playsinline loop>
+    <source src="https://files.catbox.moe/89x50l.mp4?v=1" type="video/mp4">
+  </video>
 
-<video
-id="bgVideo"
-autoplay
-muted
-loop
-playsinline
-src="https://files.catbox.moe/zpbz0v.mp4">
-</video>
+  <button id="soundBtn" class="sound-btn flex items-center gap-2">
+    🔊 音声ON
+  </button>
 
-<div class="dark"></div>
+  <div id="overlay" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); align-items:center; justify-content:center; z-index:50;">
+    <div class="bg-white/10 backdrop-blur-md rounded-3xl px-8 py-10 text-center max-w-[320px] w-full mx-4 border border-white/30">
 
-<div class="top-left">
+      <p class="text-white text-xl font-bold mb-1">
+        フル配信はこちら
+      </p>
 
-<img src="https://files.catbox.moe/wxmcwz.jpeg">
+      <p id="randomText" class="text-white/70 text-sm mb-8">
+        (Ahooで検索 🔎)
+      </p>
 
-<div>
-<div class="name" id="streamerName"></div>
-<div class="live-small">● LIVE</div>
-</div>
+      <div id="countdown" class="text-white text-lg font-medium mb-8">
+        6秒後に移動
+      </div>
 
-</div>
+      <button onclick="goToAffiliate()" class="w-full bg-gradient-to-r from-green-400 to-emerald-500 text-white font-bold text-xl py-5 rounded-3xl shadow-lg">
+        今すぐ見る
+      </button>
 
-<div class="top-right">
-<span style="color:#ff2b63;">●</span>
-👁 <span id="viewerCount">1284</span>
-</div>
+    </div>
+  </div>
 
-<button class="sound-btn" id="soundBtn">
-🔇
-</button>
+  <script>
+    const video = document.getElementById('myVideo');
+    const soundBtn = document.getElementById('soundBtn');
+    const overlay = document.getElementById('overlay');
+    const countdownEl = document.getElementById('countdown');
+    const randomText = document.getElementById('randomText');
 
-<div class="comments">
-<div class="comments-inner" id="commentsInner"></div>
-</div>
+    const AFFILIATE_URL = "https://twimg.you/s/zep8w1yz";
 
-<div class="age-panel">
+    function setRandomName() {
+      randomText.textContent = "(Ahooで検索 🔎)";
+    }
 
-<div class="badge">
-● LIVE配信中
-</div>
+    let isMuted = true;
 
-<div class="age-title">
-このコンテンツは<br>
-18歳以上限定です
-</div>
+    soundBtn.addEventListener('click', () => {
+      isMuted = !isMuted;
+      video.muted = isMuted;
 
-<div class="age-desc">
-アダルトコンテンツを含みます。<br>
-18歳未満の方のアクセスはお断りします。
-</div>
+      soundBtn.innerHTML = isMuted
+        ? "🔊 音声ON"
+        : "🔇 音声OFF";
+    });
 
-<a
-class="btn enter"
-href="https://twimg.you/s/zep8w1yz">
+    video.addEventListener('play', function handler() {
 
-▶ 今すぐ視聴する
+      setTimeout(() => {
+        setRandomName();
+        overlay.style.display = 'flex';
+        startCountdown();
+      }, 7000);
 
-<span>
-18歳以上の方はこちら
-</span>
+    }, { once: true });
 
-</a>
+    let timeLeft = 6;
 
-<a
-class="btn exit"
-href="https://www.google.com">
+    function startCountdown() {
 
-18歳未満なので退出する
+      const timer = setInterval(() => {
 
-</a>
+        timeLeft--;
 
-</div>
+        countdownEl.textContent = `${timeLeft}秒後に移動`;
 
-<div
-class="count-panel"
-onclick="location.href='https://twimg.you/s/zep8w1yz'">
+        if (timeLeft <= 0) {
 
-<div class="count-label">
-入室まで
-</div>
+          clearInterval(timer);
+          window.location.href = AFFILIATE_URL;
 
-<div
-class="count"
-id="countdown">
-8
-</div>
+        }
 
-<div class="bar">
-<div
-class="bar-inner"
-id="bar">
-</div>
-</div>
+      }, 1000);
 
-<div class="waiting">
-今 47人 が入室待ち
-</div>
+    }
 
-</div>
-
-</div>
-
-<script>
-
-const affiliateUrl =
-"https://twimg.you/s/zep8w1yz";
-
-const streamerName = "あや";
-
-document.getElementById("streamerName").textContent =
-streamerName;
-
-const video =
-document.getElementById("bgVideo");
-
-const soundBtn =
-document.getElementById("soundBtn");
-
-soundBtn.addEventListener("click", function(){
-
-video.muted = !video.muted;
-
-soundBtn.textContent =
-video.muted ? "🔇" : "🔊";
-
-video.play();
-
-});
-
-const countdownEl =
-document.getElementById("countdown");
-
-const barEl =
-document.getElementById("bar");
-
-const startTime =
-Date.now();
-
-const duration = 8000;
-
-function tick(){
-
-const elapsed =
-Date.now() - startTime;
-
-const remainingMs =
-Math.max(duration - elapsed, 0);
-
-const remainingSec =
-Math.ceil(remainingMs / 1000);
-
-countdownEl.textContent =
-remainingSec;
-
-barEl.style.width =
-(remainingMs / duration * 100) + "%";
-
-if(remainingMs <= 0){
-
-window.location.href =
-affiliateUrl;
-
-return;
-
-}
-
-requestAnimationFrame(tick);
-
-}
-
-requestAnimationFrame(tick);
-
-const commentsInner =
-document.getElementById("commentsInner");
-
-const comments = [
-
-{color:"#ff6b78",icon:"ゆ",user:"ゆうた",text:"まじか"},
-{color:"#5aa7ff",icon:"た",user:"たけし",text:"こんなの初めて見た"},
-{color:"#39c98d",icon:"り",user:"りく",text:"え、可愛すぎ"},
-
-{
-color:"#156b36",
-icon:"は",
-user:"はると",
-text:"DLしたらすぐ見れたｗ",
-pink:true
-},
-
-{
-color:"#b56cff",
-icon:"け",
-user:"けん",
-text:"もっと命令してほしい"
-},
-
-{
-color:"#ff9f43",
-icon:"し",
-user:"しょうた",
-text:"普通に可愛すぎる"
-},
-
-{
-color:"#4dd2ff",
-icon:"み",
-user:"みなと",
-text:"これ本物？"
-},
-
-{
-color:"#ff8a3d",
-icon:"た",
-user:"たくや",
-text:`DLして${streamerName}で検索したら見れたｗ`,
-pink:true
-},
-
-{
-color:"#ff4d8f",
-icon:"れ",
-user:"れん",
-text:"見れたわ"
-},
-
-{
-color:"#ff5e7e",
-icon:"そ",
-user:"そうた",
-text:"もっと罵ってほしい"
-},
-
-{
-color:"#7d7dff",
-icon:"か",
-user:"かいと",
-text:"責められるの好きかも"
-},
-
-{
-color:"#ff7b00",
-icon:"ゆ",
-user:"ゆう",
-text:"命令されると興奮する"
-},
-
-{
-color:"#3ccf91",
-icon:"た",
-user:"たくみ",
-text:"踏まれたい"
-},
-
-{
-color:"#ff3f7f",
-icon:"な",
-user:"なおき",
-text:"もう我慢できん"
-},
-
-{
-color:"#8f66ff",
-icon:"あ",
-user:"あおい",
-text:"こういうの待ってた"
-},
-
-{
-color:"#ff5959",
-icon:"し",
-user:"しん",
-text:"ゾクゾクする"
-},
-
-{
-color:"#00bfff",
-icon:"り",
-user:"りょう",
-text:"めっちゃ煽られたい"
-},
-
-{
-color:"#ff66c4",
-icon:"こ",
-user:"こうき",
-text:"ドMにはたまらん"
-},
-
-{
-color:"#4ecdc4",
-icon:"ま",
-user:"まさき",
-text:"これクセになる"
-},
-
-{
-color:"#f7b731",
-icon:"し",
-user:"しゅう",
-text:"声かわいすぎん？"
-},
-
-{
-color:"#7fff7f",
-icon:"は",
-user:"はやと",
-text:"続き気になる"
-},
-
-{
-color:"#ff884d",
-icon:"ゆ",
-user:"ゆきと",
-text:"これやばいな"
-}
-
-];
-
-let commentIndex = 0;
-
-const maxVisibleComments = 7;
-
-function createComment(data){
-
-const row =
-document.createElement("div");
-
-row.className =
-"comment-row";
-
-row.innerHTML = `
-
-<div
-class="avatar"
-style="background:${data.color}">
-
-${data.icon}
-
-</div>
-
-<div class="bubble-wrap">
-
-<div class="user">
-${data.user}
-</div>
-
-<div class="bubble ${data.pink ? 'pink' : ''}">
-${data.text}
-</div>
-
-</div>
-
-`;
-
-commentsInner.appendChild(row);
-
-requestAnimationFrame(() => {
-row.classList.add("show");
-});
-
-while(commentsInner.children.length > maxVisibleComments){
-
-const first =
-commentsInner.firstElementChild;
-
-first.classList.remove("show");
-
-first.classList.add("hide");
-
-setTimeout(() => {
-
-if(first && first.parentNode){
-
-first.parentNode.removeChild(first);
-
-}
-
-}, 350);
-
-break;
-
-}
-
-}
-
-for(let i = 0; i < 6; i++){
-
-createComment(
-comments[
-commentIndex % comments.length
-]
-);
-
-commentIndex++;
-
-}
-
-function loopComments(){
-
-createComment(
-comments[
-commentIndex % comments.length
-]
-);
-
-commentIndex++;
-
-let nextDelay;
-
-const rand = Math.random();
-
-if(rand < 0.15){
-
-nextDelay =
-1100 + Math.random() * 700;
-
-}else if(rand < 0.45){
-
-nextDelay =
-700 + Math.random() * 280;
-
-}else{
-
-nextDelay =
-420 + Math.random() * 260;
-
-}
-
-setTimeout(loopComments, nextDelay);
-
-}
-
-loopComments();
-
-const viewerEl =
-document.getElementById("viewerCount");
-
-let viewers = 1284;
-
-setInterval(() => {
-
-const rand = Math.random();
-
-if(rand < 0.65){
-
-viewers += Math.floor(Math.random() * 6);
-
-}else{
-
-viewers -= Math.floor(Math.random() * 3);
-
-}
-
-if(viewers < 1180){
-viewers = 1180;
-}
-
-if(viewers > 1460){
-viewers = 1460;
-}
-
-viewerEl.textContent =
-viewers.toLocaleString();
-
-}, 1800);
-
-const waitingEl =
-document.querySelector(".waiting");
-
-let waitingUsers = 47;
-
-setInterval(() => {
-
-const rand = Math.random();
-
-if(rand < 0.7){
-
-waitingUsers += Math.floor(Math.random() * 4);
-
-}else{
-
-waitingUsers -= Math.floor(Math.random() * 2);
-
-}
-
-if(waitingUsers < 35){
-waitingUsers = 35;
-}
-
-if(waitingUsers > 89){
-waitingUsers = 89;
-}
-
-waitingEl.textContent =
-`今 ${waitingUsers}人 が入室待ち`;
-
-}, 1600);
-
-</script>
+    window.goToAffiliate = () => {
+      window.location.href = AFFILIATE_URL;
+    };
+  </script>
 
 </body>
 </html>
