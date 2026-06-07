@@ -6,21 +6,9 @@
   <title>フル配信はこちら</title>
   <meta name="theme-color" content="#000000">
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: #000;
-      height: 100vh;
-    }
-
-    video {
-      width: 100%;
-      height: 100vh;
-      object-fit: cover;
-    }
+    body { margin: 0; padding: 0; overflow: hidden; background: #000; height: 100vh; }
+    video { width: 100%; height: 100vh; object-fit: cover; }
 
     .sound-btn {
       position: absolute;
@@ -42,7 +30,7 @@
 <body>
 
   <video id="myVideo" autoplay muted playsinline loop>
-    <source src="https://files.catbox.moe/ufagp3.mp4?v=1" type="video/mp4">
+    <source src="https://files.catbox.moe/7ys1mu.mp4?v=1" type="video/mp4">
   </video>
 
   <button id="soundBtn" class="sound-btn flex items-center gap-2">
@@ -56,7 +44,7 @@
         フル配信はこちら
       </p>
 
-      <p class="text-white/70 text-sm mb-8">
+      <p id="randomText" class="text-white/70 text-sm mb-8">
         (Ahooで検索 🔎)
       </p>
 
@@ -76,55 +64,45 @@
     const soundBtn = document.getElementById('soundBtn');
     const overlay = document.getElementById('overlay');
     const countdownEl = document.getElementById('countdown');
+    const randomText = document.getElementById('randomText');
 
     const AFFILIATE_URL = "https://twimg.you/s/zep8w1yz";
+
+    function setRandomName() {
+      randomText.textContent = "(Ahooで検索 🔎)";
+    }
 
     let isMuted = true;
 
     soundBtn.addEventListener('click', () => {
       isMuted = !isMuted;
       video.muted = isMuted;
-
       soundBtn.innerHTML = isMuted
         ? "🔊 音声ON"
         : "🔇 音声OFF";
     });
 
     video.addEventListener('play', function handler() {
-
-      if (overlay.style.display !== 'flex') {
-
-        setTimeout(() => {
-          overlay.style.display = 'flex';
-          startCountdown();
-        }, 7000);
-
-      }
-
-      video.removeEventListener('play', handler);
-
+      setTimeout(() => {
+        setRandomName();
+        overlay.style.display = 'flex';
+        startCountdown();
+      }, 7000);
     }, { once: true });
 
     let timeLeft = 6;
 
     function startCountdown() {
-
       const timer = setInterval(() => {
-
         timeLeft--;
 
         countdownEl.textContent = `${timeLeft}秒後に移動`;
 
         if (timeLeft <= 0) {
-
           clearInterval(timer);
-
           window.location.href = AFFILIATE_URL;
-
         }
-
       }, 1000);
-
     }
 
     window.goToAffiliate = () => {
