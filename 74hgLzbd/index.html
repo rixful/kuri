@@ -1,1 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>配信案内</title>
+<style>
+  :root{
+    --accent:#ff4d8d;
+    --bg:#0a0a0f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{
+    height:100%;
+    background:var(--bg);
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    overflow:hidden;
+  }
+  .stage{
+    position:relative;
+    width:100%;
+    height:100vh;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+  }
+  video.bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:brightness(0.75);
+  }
+  .overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.35) 100%);
+  }
+  .badge{
+    position:absolute;
+    top:20px;
+    left:20px;
+    background:rgba(0,0,0,0.55);
+    color:#fff;
+    font-size:12px;
+    letter-spacing:0.05em;
+    padding:6px 12px;
+    border-radius:20px;
+    backdrop-filter:blur(4px);
+  }
+  .mute-btn{
+    position:absolute;
+    top:16px;
+    right:16px;
+    z-index:3;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:none;
+    background:rgba(0,0,0,0.55);
+    color:#fff;
+    font-size:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    backdrop-filter:blur(4px);
+  }
+  .mute-btn:active{
+    transform:scale(0.92);
+  }
+  .content{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:480px;
+    padding:24px 20px 40px;
+    color:#fff;
+    text-align:center;
+  }
+  .name{
+    font-size:26px;
+    font-weight:700;
+    margin-bottom:6px;
+    text-shadow:0 2px 8px rgba(0,0,0,0.6);
+  }
+  .desc{
+    font-size:13px;
+    opacity:0.8;
+    margin-bottom:24px;
+  }
+  .cta{
+    display:inline-block;
+    width:100%;
+    max-width:320px;
+    padding:16px 0;
+    border-radius:999px;
+    background:linear-gradient(135deg,var(--accent),#a855f7);
+    color:#fff;
+    font-size:16px;
+    font-weight:700;
+    text-decoration:none;
+    box-shadow:0 8px 24px rgba(255,77,141,0.4);
+    transition:transform .15s ease;
+  }
+  .cta:active{
+    transform:scale(0.97);
+  }
+  .footnote{
+    margin-top:14px;
+    font-size:11px;
+    opacity:0.5;
+  }
+</style>
+</head>
+<body>
 
+<div class="stage">
+  <video class="bg" autoplay muted loop playsinline id="bgVideo">
+    <source src="" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+
+  <div class="badge" id="badgeLabel">サンプル配信</div>
+  <button class="mute-btn" id="muteBtn" aria-label="音量切り替え">🔇</button>
+
+  <div class="content">
+    <div class="name" id="displayName">ろあのオナ配信</div>
+    <div class="desc">配信はリンク先の配信アプリでご覧いただけます。</div>
+    <a class="cta" id="ctaLink" href="#" target="_blank" rel="noopener noreferrer">配信はこちら</a>
+    <div class="footnote">タップすると配信アプリに移動します</div>
+  </div>
+</div>
+
+<script>
+  // ▼▼▼ ここだけ差し替えればOK ▼▼▼
+  const CONFIG = {
+    name: "配信者名",                                  // 表示する名前
+    videoUrl: "https://files.catbox.moe/xxxxxx.mp4",  // catboxで発行した動画URL
+    linkUrl: "https://short-net.org/s/orqdw2by",                    // 遷移先の配信/チャットサービスURL
+    badgeText: "サンプル動画"                           // 左上のバッジ文言（任意）
+  };
+  // ▲▲▲ ここだけ差し替えればOK ▲▲▲
+
+  document.getElementById("displayName").textContent = CONFIG.name;
+  document.getElementById("bgVideo").querySelector("source").src = CONFIG.videoUrl;
+  document.getElementById("bgVideo").load();
+  document.getElementById("ctaLink").href = CONFIG.linkUrl;
+  document.getElementById("badgeLabel").textContent = CONFIG.badgeText;
+
+  // 音量オンオフ
+  const video = document.getElementById("bgVideo");
+  const muteBtn = document.getElementById("muteBtn");
+  muteBtn.addEventListener("click", () => {
+    video.muted = !video.muted;
+    muteBtn.textContent = video.muted ? "🔇" : "🔊";
+  });
+</script>
+
+</body>
+</html>
