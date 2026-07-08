@@ -101,8 +101,17 @@
     font-size:16px;
     font-weight:700;
     text-decoration:none;
-    box-shadow:0 8px 24px rgba(255,77,141,0.4);
+    box-shadow:0 0 20px rgba(255,77,141,0.35);
     transition:transform .15s ease;
+    animation:glow 2.5s ease-in-out infinite;
+  }
+  @keyframes glow{
+    0%,100%{
+      box-shadow:0 0 16px 2px rgba(255,77,141,0.3);
+    }
+    50%{
+      box-shadow:0 0 28px 7px rgba(255,77,141,0.65);
+    }
   }
   .cta:active{
     transform:scale(0.97);
@@ -122,12 +131,12 @@
   </video>
   <div class="overlay"></div>
 
-  <div class="badge" id="badgeLabel">サンプル配信</div>
+  <div class="badge" id="badgeLabel">サンプル動画</div>
   <button class="mute-btn" id="muteBtn" aria-label="音量切り替え">🔇</button>
 
   <div class="content">
-    <div class="name" id="displayName">オナニー配信</div>
-    <div class="desc">続きはリンク先の配信アプリでご覧いただけます。</div>
+    <div class="name" id="displayName">配信者名</div>
+    <div class="desc">続きはリンク先の配信アプリでご覧いただけます</div>
     <a class="cta" id="ctaLink" href="#" target="_blank" rel="noopener noreferrer">配信はこちら</a>
     <div class="footnote">※20歳未満のお客様はご利用をお断りしています</div>
   </div>
