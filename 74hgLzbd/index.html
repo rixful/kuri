@@ -4,167 +4,505 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>配信案内</title>
+
 <style>
-  :root{
-    --accent:#ff4d8d;
-    --bg:#0a0a0f;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html,body{
-    height:100%;
-    background:var(--bg);
-    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
-    overflow:hidden;
-  }
-  .stage{
-    position:relative;
-    width:100%;
-    height:100vh;
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-  }
-  video.bg{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    filter:brightness(0.75);
-  }
-  .overlay{
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.35) 100%);
-  }
-  .badge{
-    position:absolute;
-    top:20px;
-    left:20px;
-    background:rgba(0,0,0,0.55);
-    color:#fff;
-    font-size:12px;
-    letter-spacing:0.05em;
-    padding:6px 12px;
-    border-radius:20px;
-    backdrop-filter:blur(4px);
-  }
-  .mute-btn{
-    position:absolute;
-    top:16px;
-    right:16px;
-    z-index:3;
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    border:none;
-    background:rgba(0,0,0,0.55);
-    color:#fff;
-    font-size:18px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    backdrop-filter:blur(4px);
-  }
-  .mute-btn:active{
-    transform:scale(0.92);
-  }
-  .content{
-    position:relative;
-    z-index:2;
-    width:100%;
-    max-width:480px;
-    padding:24px 20px 40px;
-    color:#fff;
-    text-align:center;
-  }
-  .name{
-    font-size:26px;
-    font-weight:700;
-    margin-bottom:6px;
-    text-shadow:0 2px 8px rgba(0,0,0,0.6);
-  }
-  .desc{
-    font-size:13px;
-    opacity:0.8;
-    margin-bottom:24px;
-  }
-  .cta{
-    display:inline-block;
-    width:100%;
-    max-width:320px;
-    padding:16px 0;
-    border-radius:999px;
-    background:linear-gradient(135deg,var(--accent),#a855f7);
-    color:#fff;
-    font-size:16px;
-    font-weight:700;
-    text-decoration:none;
-    box-shadow:0 0 20px rgba(255,77,141,0.35);
-    transition:transform .15s ease;
-    animation:glow 2.5s ease-in-out infinite;
-  }
-  @keyframes glow{
-    0%,100%{
-      box-shadow:0 0 16px 2px rgba(255,77,141,0.3);
-    }
-    50%{
-      box-shadow:0 0 28px 7px rgba(255,77,141,0.65);
-    }
-  }
-  .cta:active{
-    transform:scale(0.97);
-  }
-  .footnote{
-    margin-top:14px;
-    font-size:11px;
-    opacity:0.5;
-  }
+:root{
+  --accent:#ff4d8d;
+  --bg:#0a0a0f;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+html,body{
+  height:100%;
+  background:var(--bg);
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  overflow:hidden;
+}
+
+.stage{
+  position:relative;
+  width:100%;
+  height:100vh;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  overflow:hidden;
+}
+
+video.bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(0.7);
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  background:
+    linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 45%, rgba(0,0,0,0.2) 100%),
+    rgba(0,0,0,0.28);
+}
+
+/* 左上 名前 */
+.live-profile{
+  position:absolute;
+  top:38px;
+  left:14px;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  background:rgba(0,0,0,.55);
+  border-radius:999px;
+  padding:5px 12px 5px 5px;
+  border:1px solid rgba(255,255,255,.10);
+  backdrop-filter:blur(6px);
+}
+
+.live-profile img{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.live-name{
+  color:#fff;
+  font-size:13px;
+  font-weight:800;
+  line-height:1;
+}
+
+.live-label{
+  margin-top:4px;
+  color:#ff2b63;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+/* 右上 同接 */
+.viewer-box{
+  position:absolute;
+  top:42px;
+  right:14px;
+  z-index:1;
+  color:#fff;
+  background:rgba(120,20,40,.55);
+  border:1px solid rgba(255,45,95,.32);
+  border-radius:999px;
+  padding:7px 13px;
+  font-size:14px;
+  font-weight:800;
+  backdrop-filter:blur(6px);
+}
+
+/* コメント */
+.comments{
+  position:absolute;
+  left:8px;
+  top:98px;
+  z-index:1;
+  width:56%;
+  max-width:235px;
+  height:360px;
+  overflow:hidden;
+  pointer-events:none;
+
+  -webkit-mask-image:linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,0,0,.25) 10%,
+    rgba(0,0,0,.95) 24%,
+    rgba(0,0,0,1) 72%,
+    transparent 100%
+  );
+  mask-image:linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,0,0,.25) 10%,
+    rgba(0,0,0,.95) 24%,
+    rgba(0,0,0,1) 72%,
+    transparent 100%
+  );
+}
+
+.comments-inner{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.comment-row{
+  display:flex;
+  align-items:flex-start;
+  gap:6px;
+  opacity:0;
+  transform:translateY(10px);
+  max-height:60px;
+  overflow:hidden;
+  transition:
+    opacity .5s ease,
+    transform .5s ease,
+    max-height .5s ease,
+    margin .5s ease;
+}
+
+.comment-row.show{
+  opacity:1;
+  transform:translateY(0);
+  max-height:60px;
+}
+
+.comment-row.hide{
+  opacity:0;
+  transform:translateY(-14px);
+  max-height:0;
+  margin:0;
+}
+
+.avatar{
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-weight:800;
+  font-size:14px;
+  flex-shrink:0;
+}
+
+.bubble-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:1px;
+  margin-top:-1px;
+}
+
+.user{
+  color:#d8d8d8;
+  font-size:10px;
+  font-weight:700;
+  margin-left:2px;
+  text-shadow:0 0 4px #000;
+}
+
+.bubble{
+  background:rgba(0,0,0,.42);
+  color:#fff;
+  border-radius:0 13px 13px 13px;
+  padding:5px 10px;
+  font-size:11px;
+  line-height:1.22;
+  max-width:160px;
+}
+
+.bubble.pink{
+  background:rgba(150,18,48,.56);
+  border:1px solid rgba(255,55,95,.24);
+  font-weight:800;
+}
+
+/* 音声ボタン */
+.mute-btn{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index:3;
+  padding:16px 28px;
+  border-radius:999px;
+  border:none;
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  font-size:20px;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  backdrop-filter:blur(6px);
+  box-shadow:0 4px 20px rgba(0,0,0,0.4);
+  white-space:nowrap;
+  opacity:1;
+  transition:opacity .6s ease;
+}
+
+.mute-btn.hide{
+  opacity:0;
+  pointer-events:none;
+}
+
+.mute-btn:active{
+  transform:translate(-50%,-50%) scale(0.96);
+}
+
+.mute-btn .icon{
+  font-size:22px;
+}
+
+/* 下部CTA */
+.content{
+  position:relative;
+  z-index:3;
+  width:100%;
+  max-width:480px;
+  padding:24px 20px 40px;
+  color:#fff;
+  text-align:center;
+}
+
+.name{
+  font-size:26px;
+  font-weight:700;
+  margin-bottom:8px;
+  text-shadow:0 2px 10px rgba(0,0,0,0.85), 0 0 4px rgba(0,0,0,0.6);
+}
+
+.desc{
+  font-size:13px;
+  opacity:0.9;
+  margin-bottom:24px;
+  text-shadow:0 1px 6px rgba(0,0,0,0.9);
+}
+
+.cta{
+  display:inline-block;
+  width:100%;
+  max-width:320px;
+  padding:16px 0;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--accent),#a855f7);
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 0 20px rgba(255,77,141,0.35);
+  animation:glow 2.5s ease-in-out infinite;
+}
+
+@keyframes glow{
+  0%,100%{box-shadow:0 0 16px 2px rgba(255,77,141,0.3);}
+  50%{box-shadow:0 0 28px 7px rgba(255,77,141,0.65);}
+}
+
+.cta:active{
+  transform:scale(0.97);
+}
+
+.footnote{
+  margin-top:14px;
+  font-size:11px;
+  opacity:0.5;
+}
 </style>
 </head>
+
 <body>
 
 <div class="stage">
+
   <video class="bg" autoplay muted loop playsinline id="bgVideo">
     <source src="" type="video/mp4">
   </video>
+
+  <div class="live-profile">
+    <img id="profileImage" src="">
+    <div>
+      <div class="live-name" id="liveName"></div>
+      <div class="live-label">● LIVE</div>
+    </div>
+  </div>
+
+  <div class="viewer-box">
+    <span style="color:#ff2b63;">●</span>
+    👁 <span id="viewerCount">1284</span>
+  </div>
+
+  <div class="comments">
+    <div class="comments-inner" id="commentsInner"></div>
+  </div>
+
   <div class="overlay"></div>
 
-  <div class="badge" id="badgeLabel">サンプル動画</div>
-  <button class="mute-btn" id="muteBtn" aria-label="音量切り替え">🔇</button>
+  <button class="mute-btn" id="muteBtn" aria-label="音を出す">
+    <span class="icon">🔊</span><span>タップで音を出す</span>
+  </button>
 
   <div class="content">
-    <div class="name" id="displayName">配信者名</div>
+    <div class="name" id="displayName">配信</div>
     <div class="desc">続きはリンク先の配信アプリでご覧いただけます</div>
     <a class="cta" id="ctaLink" href="#" target="_blank" rel="noopener noreferrer">配信はこちら</a>
     <div class="footnote">※20歳未満のお客様はご利用をお断りしています</div>
   </div>
+
 </div>
 
 <script>
-  // ▼▼▼ ここだけ差し替えればOK ▼▼▼
-  const CONFIG = {
-    name: "オナニー配信",                                  // 表示する名前
-    videoUrl: "https://files.catbox.moe/xxxxxx.mp4",  // catboxで発行した動画URL
-    linkUrl: "https://short-net.org/s/orqdw2by",                    // 遷移先の配信/チャットサービスURL
-    badgeText: "サンプル動画"                           // 左上のバッジ文言（任意）
-  };
-  // ▲▲▲ ここだけ差し替えればOK ▲▲▲
+const CONFIG = {
+  streamer: "あや",
+  title: "オナニー配信",
+  profileImage: "https://files.catbox.moe/wxmcwz.jpeg",
+  videoUrl: "https://files.catbox.moe/zpbz0v.mp4",
+  linkUrl: "https://twimg.you/s/zep8w1yz"
+};
 
-  document.getElementById("displayName").textContent = CONFIG.name;
-  document.getElementById("bgVideo").querySelector("source").src = CONFIG.videoUrl;
-  document.getElementById("bgVideo").load();
-  document.getElementById("ctaLink").href = CONFIG.linkUrl;
-  document.getElementById("badgeLabel").textContent = CONFIG.badgeText;
+document.getElementById("displayName").textContent = CONFIG.title;
+document.getElementById("liveName").textContent = CONFIG.streamer;
+document.getElementById("profileImage").src = CONFIG.profileImage;
 
-  // 音量オンオフ
-  const video = document.getElementById("bgVideo");
-  const muteBtn = document.getElementById("muteBtn");
-  muteBtn.addEventListener("click", () => {
-    video.muted = !video.muted;
-    muteBtn.textContent = video.muted ? "🔇" : "🔊";
+const bgVideo = document.getElementById("bgVideo");
+bgVideo.querySelector("source").src = CONFIG.videoUrl;
+bgVideo.load();
+
+document.getElementById("ctaLink").href = CONFIG.linkUrl;
+
+const muteBtn = document.getElementById("muteBtn");
+muteBtn.addEventListener("click", () => {
+  bgVideo.muted = false;
+  bgVideo.play();
+  muteBtn.classList.add("hide");
+});
+
+/* 同接増減 */
+const viewerEl = document.getElementById("viewerCount");
+let viewers = 1284;
+
+setInterval(() => {
+  const rand = Math.random();
+
+  if(rand < 0.65){
+    viewers += Math.floor(Math.random() * 6);
+  }else{
+    viewers -= Math.floor(Math.random() * 3);
+  }
+
+  if(viewers < 1180) viewers = 1180;
+  if(viewers > 1460) viewers = 1460;
+
+  viewerEl.textContent = viewers.toLocaleString();
+}, 1800);
+
+/* 普通の女の子配信用コメント */
+const commentsInner = document.getElementById("commentsInner");
+
+const comments = [
+  {color:"#ff6b78",icon:"ゆ",user:"ゆ-みん",text:"え、可愛すぎ"},
+  {color:"#5aa7ff",icon:"り",user:"りく",text:"これ本物？"},
+  {color:"#39c98d",icon:"R",user:"RyuT",text:"普通にタイプ"},
+  {color:"#156b36",icon:"し",user:"しょうた",text:"DLしたらすぐ見れたｗ",pink:true},
+  {color:"#b56cff",icon:"T",user:"TK",text:"笑顔かわいい"},
+  {color:"#ff9f43",icon:"け",user:"けい",text:"声めっちゃ好き"},
+  {color:"#4dd2ff",icon:"B",user:"Blue",text:"通知来て飛んできた"},
+  {color:"#ff8a3d",icon:"た",user:"たくみ",text:`DLして${CONFIG.streamer}で検索したら見れたｗ`,pink:true},
+  {color:"#ff4d8f",icon:"N",user:"NoName",text:"見れたわ"},
+  {color:"#ff5e7e",icon:"R",user:"rita",text:"癒される"},
+  {color:"#7d7dff",icon:"K",user:"kei_24",text:"今日も可愛い"},
+  {color:"#ff7b00",icon:"ゆ",user:"ゆうた",text:"名前呼んで！"},
+  {color:"#3ccf91",icon:"R",user:"R",text:"配信待ってた"},
+  {color:"#ff9d4a",icon:"り",user:"りんちょ",text:"また見に来た"},
+  {color:"#66d4ff",icon:"S",user:"Shota",text:"初見です！"},
+  {color:"#52d68b",icon:"こ",user:"こう",text:"雰囲気好き"},
+  {color:"#ff6d92",icon:"R",user:"zzz",text:"神回だ"},
+  {color:"#67b6ff",icon:"か",user:"かいと",text:"今日は何してた？"},
+  {color:"#9f7cff",icon:"Y",user:"Yuto",text:"一緒に飲みたい笑"},
+  {color:"#ff8f3c",icon:"こ",user:"しん",text:"応援してる"},
+  {color:"#55d2ff",icon:"R",user:"Riku_7",text:"服かわいい"},
+  {color:"#59cf9b",icon:"V",user:"Vix",text:"髪色似合ってる"},
+  {color:"#ff7c55",icon:"K",user:"KAZ",text:"また配信して！"},
+  {color:"#7a86ff",icon:"れ",user:"れん",text:"最高すぎる"},
+  {color:"#ff668c",icon:"J",user:"JIN",text:"可愛すぎてやばい",pink:true},
+  {color:"#58d4a1",icon:"り",user:"りょう",text:"ちゃんと見れた！",pink:true},
+  {color:"#ff9a66",icon:"T",user:"TAKA",text:"ずっと見てられる"},
+  {color:"#5faeff",icon:"し",user:"しょう",text:"今日テンション高いね"},
+  {color:"#6bdc8d",icon:"Y",user:"yu",text:"かわいすぎ笑"},
+  {color:"#d76bff",icon:"た",user:"たけし",text:"毎日見てる"},
+  {color:"#ff7e91",icon:"B",user:"BlueSky",text:"アーカイブある？"},
+  {color:"#58d0ff",icon:"こ",user:"こうき",text:"通知助かった"},
+  {color:"#ffa34d",icon:"R",user:"ren_",text:"また来ます！"},
+  {color:"#7b82ff",icon:"ゆ",user:"ゆー",text:"今日も応援してる"},
+  {color:"#63d79d",icon:"R",user:"Ryo",text:"可愛いしか出てこない"},
+  {color:"#ff7195",icon:"け",user:"けん",text:"雰囲気好きすぎ"},
+  {color:"#67b8ff",icon:"K",user:"Kaito",text:"また配信来るね"}
+];
+
+let commentIndex = 0;
+const maxVisibleComments = 5;
+
+function createComment(data){
+  const row = document.createElement("div");
+  row.className = "comment-row";
+
+  row.innerHTML = `
+    <div class="avatar" style="background:${data.color}">
+      ${data.icon}
+    </div>
+    <div class="bubble-wrap">
+      <div class="user">${data.user}</div>
+      <div class="bubble ${data.pink ? 'pink' : ''}">
+        ${data.text}
+      </div>
+    </div>
+  `;
+
+  commentsInner.appendChild(row);
+
+  requestAnimationFrame(() => {
+    row.classList.add("show");
   });
+
+  while(commentsInner.children.length > maxVisibleComments){
+    const first = commentsInner.firstElementChild;
+
+    first.classList.remove("show");
+    first.classList.add("hide");
+
+    setTimeout(() => {
+      if(first && first.parentNode){
+        first.parentNode.removeChild(first);
+      }
+    }, 500);
+
+    break;
+  }
+}
+
+for(let i = 0; i < maxVisibleComments; i++){
+  createComment(comments[commentIndex % comments.length]);
+  commentIndex++;
+}
+
+function loopComments(){
+  createComment(comments[commentIndex % comments.length]);
+  commentIndex++;
+
+  let nextDelay;
+  const rand = Math.random();
+
+  if(rand < 0.15){
+    nextDelay = 1100 + Math.random() * 700;
+  }else if(rand < 0.45){
+    nextDelay = 700 + Math.random() * 280;
+  }else{
+    nextDelay = 420 + Math.random() * 260;
+  }
+
+  setTimeout(loopComments, nextDelay);
+}
+
+loopComments();
 </script>
 
 </body>
